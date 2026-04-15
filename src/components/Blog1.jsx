@@ -51,11 +51,11 @@ export default function DesignJournal() {
       style={{ fontFamily: '"Inter", sans-serif' }}
     >
       
-      {/* SVG BACKGROUND: WEAVE TEXTURE */}
+      {/* SVG BACKGROUND: WEAVE TEXTURE using Brand Navy */}
       <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <pattern id="weave" width="40" height="40" patternUnits="userSpaceOnUse">
-            <path d="M0 20 L40 20 M20 0 L20 40" fill="none" stroke="#2C1E14" strokeWidth="0.5" />
+            <path d="M0 20 L40 20 M20 0 L20 40" fill="none" stroke="#1A365D" strokeWidth="0.5" />
           </pattern>
           <rect width="100%" height="100%" fill="url(#weave)" />
         </svg>
@@ -67,20 +67,21 @@ export default function DesignJournal() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-8">
           <div className="max-w-2xl">
             <div className="flex items-center space-x-4 mb-8">
-              <div className="w-12 h-[1px] bg-[#A68A64]"></div>
-              <span className="text-[#A68A64] uppercase tracking-[0.6em] text-[10px] font-black">The Astra Journal</span>
+              {/* Brand Teal Accent Line */}
+              <div className="w-12 h-[1px] bg-[#00A3C4]"></div>
+              <span className="text-[#00A3C4] uppercase tracking-[0.6em] text-[10px] font-black">The Astra Journal</span>
             </div>
             <h2 
-              className="text-6xl md:text-8xl font-bold text-[#2C1E14] leading-[0.9] tracking-tighter"
+              className="text-6xl md:text-8xl font-bold text-[#1A365D] leading-[0.9] tracking-tighter"
               style={{ fontFamily: '"Poppins", sans-serif' }}
             >
               Curated <br />
-              <span className="italic font-light text-[#A68A64]">Insights</span>
+              <span className="italic font-light text-[#00A3C4]">Insights</span>
             </h2>
           </div>
-          <button className="group flex items-center space-x-3 text-stone-400 hover:text-[#2C1E14] transition-all uppercase tracking-[0.4em] text-[10px] font-black border-b border-stone-200 pb-4">
+          <button className="group flex items-center space-x-3 text-stone-400 hover:text-[#1A365D] transition-all uppercase tracking-[0.4em] text-[10px] font-black border-b border-stone-200 pb-4">
             <span>View All Articles</span>
-            <MoveRight className="w-4 h-4 group-hover:translate-x-3 transition-transform" />
+            <MoveRight className="w-4 h-4 group-hover:translate-x-3 transition-transform text-[#00A3C4]" />
           </button>
         </div>
 
@@ -89,7 +90,7 @@ export default function DesignJournal() {
           {articles.map((article, idx) => (
             <div
               key={idx}
-              className="group flex flex-col bg-white border border-stone-100 shadow-sm hover:shadow-[30px_30px_60px_rgba(44,30,20,0.05)] transition-all duration-700"
+              className="group flex flex-col bg-white border border-stone-100 shadow-sm hover:shadow-[40px_40px_80px_rgba(26,54,93,0.08)] transition-all duration-700"
             >
               <div className="relative h-[450px] overflow-hidden">
                 <img
@@ -97,21 +98,21 @@ export default function DesignJournal() {
                   alt={article.title}
                   className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 grayscale-[0.4] group-hover:grayscale-0"
                 />
-                <div className="absolute top-8 left-8 bg-white px-5 py-2 shadow-xl">
-                   <span className="text-[9px] uppercase tracking-[0.3em] text-[#A68A64] font-black">{article.tags[0]}</span>
+                <div className="absolute top-8 left-8 bg-white px-5 py-2 shadow-xl border-l-2 border-[#00A3C4]">
+                   <span className="text-[9px] uppercase tracking-[0.3em] text-[#00A3C4] font-black">{article.tags[0]}</span>
                 </div>
-                <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500"></div>
+                <div className="absolute inset-0 bg-[#1A365D]/10 group-hover:bg-transparent transition-colors duration-500"></div>
               </div>
 
               <div className="p-12 flex flex-col flex-1">
                 <div className="flex items-center space-x-4 text-[10px] uppercase tracking-[0.2em] text-stone-400 mb-8 font-bold">
                   <span>By {article.author}</span>
                   <div className="w-6 h-[1px] bg-stone-200"></div>
-                  <span className="text-[#A68A64]">{article.date}</span>
+                  <span className="text-[#00A3C4]">{article.date}</span>
                 </div>
                 
                 <h3 
-                  className="text-3xl font-bold text-[#2C1E14] mb-8 leading-[1.2] group-hover:text-[#A68A64] transition-colors tracking-tight"
+                  className="text-3xl font-bold text-[#1A365D] mb-8 leading-[1.2] group-hover:text-[#00A3C4] transition-colors tracking-tight"
                   style={{ fontFamily: '"Poppins", sans-serif' }}
                 >
                   {article.title}
@@ -123,7 +124,7 @@ export default function DesignJournal() {
 
                 <a
                   href="/blog"
-                  className="inline-flex items-center text-[10px] uppercase tracking-[0.5em] font-black text-[#2C1E14] group-hover:text-[#A68A64] transition-all pt-4 border-t border-stone-50"
+                  className="inline-flex items-center text-[10px] uppercase tracking-[0.5em] font-black text-[#1A365D] group-hover:text-[#00A3C4] transition-all pt-4 border-t border-stone-50"
                 >
                   Read Journal
                   <ExternalLink className="ml-4 w-3.5 h-3.5 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />
@@ -134,19 +135,19 @@ export default function DesignJournal() {
         </div>
       </div>
 
-      {/* BACKGROUND WATERMARK */}
+      {/* BACKGROUND WATERMARK in Brand Navy */}
       <div className="absolute -bottom-10 left-0 w-full overflow-hidden pointer-events-none select-none opacity-[0.03]">
         <h2 
-          className="text-[22vw] font-bold leading-none text-[#2C1E14] tracking-tighter"
+          className="text-[22vw] font-bold leading-none text-[#1A365D] tracking-tighter"
           style={{ fontFamily: '"Poppins", sans-serif' }}
         >
           EDITORIAL
         </h2>
       </div>
 
-      {/* CUSTOM CURSOR FOLLOWER */}
+      {/* CUSTOM CURSOR FOLLOWER in Brand Teal */}
       <div
-        className="fixed w-64 h-64 bg-[#A68A64]/10 rounded-full blur-[100px] pointer-events-none z-0"
+        className="fixed w-64 h-64 bg-[#00A3C4]/10 rounded-full blur-[100px] pointer-events-none z-0"
         style={{
           left: 0,
           top: 0,

@@ -9,7 +9,6 @@ import {
   ClipboardCheck, 
   MoveRight, 
   MapPin, 
-  Star, 
   Anchor,
   Box 
 } from "lucide-react";
@@ -73,6 +72,10 @@ export default function Aboutus() {
   const navigate = useNavigate();
   const whatsappNumber = "919345445898";
 
+  // FIXED: Corrected 'brandTaal' to 'brandNavy' and used 'brandTeal' 
+  const brandNavy = "#1A365D";
+  const brandTeal = "#00A3C4";
+
   useEffect(() => {
     const lenis = new Lenis({ lerp: 0.08, smoothWheel: true });
     function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
@@ -85,7 +88,7 @@ export default function Aboutus() {
   };
 
   return (
-    <div className="bg-[#FAF9F6] text-[#2C1E14] selection:bg-[#A68A64] selection:text-white" style={{ fontFamily: '"Inter", sans-serif' }}>
+    <div className="bg-[#FAF9F6] selection:text-white" style={{ fontFamily: '"Inter", sans-serif', color: brandNavy }}>
       
       {/* HERO SECTION */}
       <section className="relative pt-48 pb-32 px-6 md:px-16 overflow-hidden border-b border-stone-100">
@@ -96,12 +99,12 @@ export default function Aboutus() {
             whileInView={{ opacity: 1, x: 0 }} 
             transition={{ duration: 1 }}
           >
-            <span className="text-[10px] uppercase tracking-[0.6em] text-[#A68A64] font-medium mb-8 block">
+            <span className="text-[10px] uppercase tracking-[0.6em] font-medium mb-8 block" style={{ color: brandTeal }}>
               Section 01 — Our Genesis
             </span>
 
             <h1 className="text-4xl md:text-5xl font-light leading-[1.1] mb-10 tracking-tighter" style={{ fontFamily: '"Poppins", sans-serif' }}>
-              Crafting <span className="italic text-[#A68A64] font-extralight">Timeless Interiors</span><br/>
+              Crafting <span className="italic font-extralight" style={{ color: brandTeal }}>Timeless Interiors</span><br/>
               That Reflect Identity & Precision.
             </h1>
 
@@ -112,15 +115,10 @@ export default function Aboutus() {
               balanced, and deeply personal. 
             </p>
 
-            <p className="text-stone-400 font-extralight leading-relaxed mb-10 text-base">
-              Our team combines global design exposure with local artisan expertise,
-              ensuring each square inch serves a purpose while expressing character.
-              Every detail is intentional. Every finish is considered.
-            </p>
-
             <button 
               onClick={() => navigate('/port')}
-              className="flex items-center space-x-3 text-[#A68A64] font-semibold text-[10px] uppercase tracking-[0.4em] hover:text-[#2C1E14] transition-colors"
+              className="flex items-center space-x-3 font-semibold text-[10px] uppercase tracking-[0.4em] hover:opacity-70 transition-opacity"
+              style={{ color: brandTeal }}
             >
               <span>Explore Portfolio</span>
               <MoveRight className="w-4 h-4 stroke-[1.5px]" />
@@ -141,16 +139,15 @@ export default function Aboutus() {
                />
             </div>
           </motion.div>
-
         </div>
       </section>
 
       {/* REGIONAL PRESENCE */}
-      <section className="py-32 bg-[#1A1512] text-white px-6 md:px-16 relative overflow-hidden">
+      <section className="py-32 bg-[#050A0F] text-white px-6 md:px-16 relative overflow-hidden">
         <div className="max-w-[1400px] mx-auto grid lg:grid-cols-[1fr_1.5fr] gap-20 items-center">
 
           <div className="relative z-20">
-            <span className="text-[10px] uppercase tracking-[0.5em] text-[#A68A64] font-medium mb-8 block">
+            <span className="text-[10px] uppercase tracking-[0.5em] font-medium mb-8 block" style={{ color: brandTeal }}>
               Regional Presence
             </span>
 
@@ -165,12 +162,13 @@ export default function Aboutus() {
                   key={i}
                   onMouseEnter={() => setActiveLoc(i)}
                   className={`w-full p-6 text-left transition-all duration-500 rounded-sm group ${
-                    activeLoc === i ? 'bg-[#A68A64]/10 border-l-2 border-[#A68A64] text-white' : 'text-stone-600'
+                    activeLoc === i ? 'bg-white/5 border-l-2 text-white' : 'text-stone-600'
                   }`}
+                  style={{ borderLeftColor: activeLoc === i ? brandTeal : 'transparent' }}
                 >
                   <div className="flex justify-between items-center">
                     <h4 className="text-xl font-light tracking-tight" style={{ fontFamily: '"Poppins", sans-serif' }}>{loc.name}</h4>
-                    <span className={`text-[8px] font-black uppercase tracking-[0.3em] ${activeLoc === i ? 'text-[#A68A64]' : 'text-stone-800'}`}>
+                    <span className={`text-[8px] font-black uppercase tracking-[0.3em]`} style={{ color: activeLoc === i ? brandTeal : '#1a1a1a' }}>
                       {loc.projects}
                     </span>
                   </div>
@@ -179,15 +177,14 @@ export default function Aboutus() {
             </div>
           </div>
           
-          {/* 3D PERSPECTIVE ATELIER DESIGN */}
           <div className="relative h-[600px] w-full hidden md:flex items-center justify-center perspective-1000">
              <motion.div 
                animate={{ rotateX: 55, rotateZ: -25 }}
                transition={{ duration: 0.5 }}
-               className="relative w-[80%] h-[80%] bg-[#2C1E14] border border-white/5 shadow-[0_50px_100px_rgba(0,0,0,0.8)] rounded-sm overflow-hidden"
-               style={{ transformStyle: 'preserve-3d' }}
+               className="relative w-[80%] h-[80%] border border-white/5 shadow-[0_50px_100px_rgba(0,0,0,0.8)] rounded-sm overflow-hidden"
+               style={{ transformStyle: 'preserve-3d', backgroundColor: brandNavy }}
              >
-                <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: 'linear-gradient(#A68A64 1px, transparent 1px), linear-gradient(90deg, #A68A64 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+                <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: `linear-gradient(${brandTeal} 1px, transparent 1px), linear-gradient(90deg, ${brandTeal} 1px, transparent 1px)`, backgroundSize: '60px 60px' }} />
                 
                 {sectionsData.locations.map((loc, i) => (
                   <motion.div
@@ -196,17 +193,11 @@ export default function Aboutus() {
                     style={{ left: loc.coords.x, top: loc.coords.y, translateZ: '30px' }}
                   >
                     <div className={`relative flex items-center justify-center transition-all duration-700 ${activeLoc === i ? 'scale-150' : 'scale-75 opacity-20'}`}>
-                      <div className="absolute w-10 h-10 bg-[#A68A64]/10 rounded-full animate-ping" />
-                      <MapPin className={`w-5 h-5 ${activeLoc === i ? 'text-[#A68A64]' : 'text-white'}`} strokeWidth={1} />
+                      <div className="absolute w-10 h-10 rounded-full animate-ping" style={{ backgroundColor: `${brandTeal}20` }} />
+                      <MapPin className={`w-5 h-5 ${activeLoc === i ? 'text-white' : 'text-white/40'}`} style={{ color: activeLoc === i ? brandTeal : '' }} strokeWidth={1} />
                     </div>
                   </motion.div>
                 ))}
-
-                <motion.div 
-                  animate={{ left: sectionsData.locations[activeLoc].coords.x, top: sectionsData.locations[activeLoc].coords.y }}
-                  className="absolute w-[0.5px] h-96 bg-gradient-to-t from-[#A68A64] to-transparent pointer-events-none"
-                  style={{ translateZ: '0px', transform: 'rotateX(-90deg)', originY: 'bottom' }}
-                />
              </motion.div>
 
              <AnimatePresence mode="wait">
@@ -215,42 +206,32 @@ export default function Aboutus() {
                  initial={{ opacity: 0, y: 20 }}
                  animate={{ opacity: 1, y: 0 }}
                  exit={{ opacity: 0, y: -20 }}
-                 className="absolute bottom-5 right-0 z-30 bg-white p-10 shadow-2xl max-w-xs border-t border-[#A68A64]"
+                 className="absolute bottom-5 right-0 z-30 bg-white p-10 shadow-2xl max-w-xs border-t"
+                 style={{ borderTopColor: brandTeal }}
                >
-                 <Box className="w-6 h-6 text-[#A68A64] mb-6 stroke-[1px]" />
-                 <h3 className="text-3xl font-light text-[#2C1E14] mb-3 tracking-tighter" style={{ fontFamily: '"Poppins", sans-serif' }}>
+                 <Box className="w-6 h-6 mb-6 stroke-[1px]" style={{ color: brandTeal }} />
+                 <h3 className="text-3xl font-light mb-3 tracking-tighter" style={{ fontFamily: '"Poppins", sans-serif', color: brandNavy }}>
                    {sectionsData.locations[activeLoc].name}
                  </h3>
-                 <p className="text-[#A68A64] font-black tracking-[0.3em] uppercase text-[9px] mb-6">
+                 <p className="font-black tracking-[0.3em] uppercase text-[9px] mb-6" style={{ color: brandTeal }}>
                    {sectionsData.locations[activeLoc].type}
                  </p>
                  <p className="text-stone-400 text-xs leading-relaxed italic font-extralight tracking-wide">
                    {sectionsData.locations[activeLoc].desc}
                  </p>
-                 <div className="mt-8 flex space-x-1.5 text-[#A68A64]/30">
-                    {[1,2,3,4,5].map(s => <Star key={s} className="w-3 h-3 fill-current" />)}
-                 </div>
                </motion.div>
              </AnimatePresence>
           </div>
-
         </div>
       </section>
 
       {/* PROCESS */}
       <section className="py-40 px-6 md:px-16 overflow-hidden">
         <div className="max-w-[1400px] mx-auto grid lg:grid-cols-2 gap-32">
-
           <div className="space-y-20">
-            <span className="text-[10px] uppercase tracking-[0.5em] text-[#A68A64] font-medium block">
+            <span className="text-[10px] uppercase tracking-[0.5em] font-medium block" style={{ color: brandTeal }}>
               Section 06-07 — Process
             </span>
-
-            <p className="text-stone-400 font-extralight leading-relaxed text-lg italic border-l border-stone-100 pl-10">
-              Our methodology balances structure with creativity. Every stage is strategically
-              planned and carefully executed.
-            </p>
-
             <div className="space-y-16">
               {[
                 { icon: Compass, title: "Discovery", text: "Understanding lifestyle patterns, spatial flow, and future adaptability." },
@@ -258,11 +239,11 @@ export default function Aboutus() {
                 { icon: ClipboardCheck, title: "Execution", text: "On-site supervision, premium sourcing, and flawless finishing." }
               ].map((step, i) => (
                 <div key={i} className="flex gap-10 group">
-                  <div className="text-3xl font-extralight text-stone-200 group-hover:text-[#A68A64] transition-colors tabular-nums" style={{ fontFamily: '"Poppins", sans-serif' }}>
+                  <div className="text-3xl font-extralight text-stone-200 group-hover:text-[#00A3C4] transition-colors tabular-nums" style={{ fontFamily: '"Poppins", sans-serif', color: activeLoc === i ? brandTeal : '' }}>
                     0{i+1}
                   </div>
                   <div className="space-y-4">
-                    <h4 className="text-2xl font-light tracking-tight text-[#2C1E14]" style={{ fontFamily: '"Poppins", sans-serif' }}>{step.title}</h4>
+                    <h4 className="text-2xl font-light tracking-tight" style={{ fontFamily: '"Poppins", sans-serif', color: brandNavy }}>{step.title}</h4>
                     <p className="text-stone-500 text-sm font-extralight leading-relaxed tracking-wide max-w-sm">
                       {step.text}
                     </p>
@@ -272,16 +253,14 @@ export default function Aboutus() {
             </div>
           </div>
 
-          <Tilt className="bg-[#2C1E14] p-20 relative overflow-hidden text-white flex flex-col justify-center rounded-sm group">
+          <Tilt className="p-20 relative overflow-hidden text-white flex flex-col justify-center rounded-sm group" style={{ backgroundColor: brandNavy }}>
              <Anchor className="absolute -top-10 -right-10 w-48 h-48 text-white/5 transition-transform duration-1000 group-hover:scale-110" />
              <h3 className="text-4xl font-light italic mb-10 tracking-tight" style={{ fontFamily: '"Poppins", sans-serif' }}>Global Sourcing.</h3>
              <p className="text-stone-400 font-extralight leading-relaxed mb-12 text-lg tracking-wide">
-                From Italian Carrara marble to engineered European oak, 
-                we source globally to ensure unmatched material quality and durability.
+                From Italian Carrara marble to engineered European oak, we source globally to ensure unmatched material quality.
              </p>
-             <div className="w-12 h-[0.5px] bg-[#A68A64]" />
+             <div className="w-12 h-[0.5px]" style={{ backgroundColor: brandTeal }} />
           </Tilt>
-
         </div>
       </section>
 
@@ -289,17 +268,18 @@ export default function Aboutus() {
       <section className="py-48 bg-white px-6 md:px-16 text-center border-t border-stone-100">
         <div className="max-w-[1000px] mx-auto">
           <p className="text-4xl md:text-6xl font-extralight text-stone-800 italic leading-[1.2] mb-20 tracking-tighter" style={{ fontFamily: '"Poppins", sans-serif' }}>
-            "A well-designed space is an <span className="text-[#A68A64]">investment</span> in how you live."
+            "A well-designed space is an <span style={{ color: brandTeal }}>investment</span> in how you live."
           </p>
 
           <button 
             onClick={handleWhatsAppRedirect}
-            className="group relative px-20 py-8 bg-[#2C1E14] text-white overflow-hidden transition-all duration-700 active:scale-95 shadow-2xl rounded-full"
+            className="group relative px-20 py-8 text-white overflow-hidden transition-all duration-700 active:scale-95 shadow-2xl rounded-full"
+            style={{ backgroundColor: brandNavy }}
           >
             <span className="relative z-10 text-[10px] uppercase tracking-[0.5em] font-black flex items-center group-hover:text-[#FAF9F6]">
               Consult with Astra <MoveRight className="ml-5 w-5 h-5 group-hover:translate-x-3 transition-transform" />
             </span>
-            <div className="absolute inset-0 bg-[#A68A64] translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]" />
+            <div className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]" style={{ backgroundColor: brandTeal }} />
           </button>
         </div>
       </section>
@@ -308,7 +288,7 @@ export default function Aboutus() {
         .perspective-1000 { perspective: 1500px; }
         .custom-scrollbar::-webkit-scrollbar { width: 2px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #A68A64; opacity: 0.5; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: ${brandTeal}; opacity: 0.5; }
       `}} />
     </div>
   );

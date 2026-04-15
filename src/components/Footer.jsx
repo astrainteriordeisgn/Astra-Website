@@ -13,18 +13,19 @@ export default function Footer() {
 
   return (
     <footer 
-      className="relative bg-[#2C1E14] overflow-hidden border-t border-white/5" 
+      className="relative bg-[#050A0F] overflow-hidden border-t border-white/5" 
       aria-labelledby="footer-heading"
       style={{ fontFamily: '"Inter", sans-serif' }}
     >
       <h2 id="footer-heading" className="sr-only">Footer</h2>
       
-      {/* SVG BACKGROUND: REFINED DOT GRID */}
-      <div className="absolute inset-0 z-0 opacity-[0.04] pointer-events-none" aria-hidden="true">
+      {/* SVG BACKGROUND: ARCHITECTURAL TECHNICAL GRID */}
+      <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" aria-hidden="true">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <pattern id="footer-grid" width="50" height="50" patternUnits="userSpaceOnUse">
-              <circle cx="1" cy="1" r="0.5" fill="#A68A64" />
+            <pattern id="footer-grid" width="80" height="80" patternUnits="userSpaceOnUse">
+              <path d="M 80 0 L 0 0 0 80" fill="none" stroke="#00A3C4" strokeWidth="0.5"/>
+              <circle cx="40" cy="40" r="1" fill="#00A3C4" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#footer-grid)" />
@@ -33,20 +34,20 @@ export default function Footer() {
 
       <div className="relative z-10 max-w-[1600px] mx-auto px-6 lg:px-16 pt-24 pb-12">
         
-        {/* TOP SECTION: BENTO GRID UI */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 border border-white/10 bg-white/[0.02] backdrop-blur-sm mb-20">
+        {/* TOP SECTION: PROFESSIONAL BENTO UI */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-px bg-white/10 border border-white/10 overflow-hidden shadow-2xl">
           
-          {/* Block 1: Identity */}
-          <div className="lg:col-span-4 p-10 lg:p-14 space-y-10 border-b lg:border-b-0 lg:border-r border-white/10">
+          {/* Block 1: Identity - Deep Navy Base */}
+          <div className="lg:col-span-4 bg-[#050A0F] p-10 lg:p-14 space-y-10">
             <Link to="/" aria-label="Astra Interior Home" className="inline-block group">
               <img 
                 src={Logo} 
                 alt="Astra Interior" 
-                className="h-20 w-auto object-contain transition-transform duration-700 group-hover:scale-105" 
+                className="h-16 w-auto object-contain transition-transform duration-700 group-hover:scale-105" 
                 loading="lazy"
               />
             </Link>
-            <p className="text-stone-400 leading-relaxed font-extralight italic text-lg">
+            <p className="text-stone-400 leading-relaxed font-extralight italic text-lg max-w-sm">
               "Crafting timeless sanctuaries where architectural precision meets the soul of modern living."
             </p>
             <div className="flex space-x-3">
@@ -59,7 +60,7 @@ export default function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-12 h-12 border border-white/10 flex items-center justify-center text-stone-400 hover:text-white hover:bg-[#A68A64] hover:border-[#A68A64] transition-all duration-500 rounded-full"
+                  className="w-12 h-12 border border-white/10 flex items-center justify-center text-stone-400 hover:text-white hover:bg-[#00A3C4] hover:border-[#00A3C4] transition-all duration-500 rounded-full"
                 >
                   <span className="sr-only">{social.label}</span>
                   <social.icon className="w-4 h-4 stroke-[1px]" />
@@ -68,10 +69,10 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Block 2: Navigation */}
-          <div className="lg:col-span-4 p-10 lg:p-14 border-b lg:border-b-0 lg:border-r border-white/10">
+          {/* Block 2: Navigation - Minimalist Studio Links */}
+          <div className="lg:col-span-4 bg-[#050A0F] p-10 lg:p-14 border-y lg:border-y-0 lg:border-x border-white/10">
             <h3 
-              className="text-[#A68A64] font-light text-2xl tracking-tight mb-12"
+              className="text-[#00A3C4] font-light text-2xl tracking-tight mb-12"
               style={{ fontFamily: '"Poppins", sans-serif' }}
             >
               The Studio
@@ -86,8 +87,8 @@ export default function Footer() {
                   { name: 'Private Inquiry', path: '/contactus' }
                 ].map((item) => (
                   <li key={item.name}>
-                    <Link to={item.path} className="text-stone-400 hover:text-white transition-all flex items-center group text-[10px] uppercase tracking-[0.5em] font-bold">
-                      <span className="w-0 group-hover:w-8 h-[0.5px] bg-[#A68A64] mr-0 group-hover:mr-4 transition-all duration-500"></span>
+                    <Link to={item.path} className="text-stone-400 hover:text-[#00A3C4] transition-all flex items-center group text-[10px] uppercase tracking-[0.5em] font-bold">
+                      <span className="w-0 group-hover:w-8 h-[0.5px] bg-[#00A3C4] mr-0 group-hover:mr-4 transition-all duration-500"></span>
                       {item.name}
                     </Link>
                   </li>
@@ -96,26 +97,26 @@ export default function Footer() {
             </nav>
           </div>
 
-          {/* Block 3: Contact & Direct Inquiry */}
-          <div className="lg:col-span-4 p-10 lg:p-14 flex flex-col justify-between">
+          {/* Block 3: Contact & Engagement */}
+          <div className="lg:col-span-4 bg-[#050A0F] p-10 lg:p-14 flex flex-col justify-between">
             <div className="space-y-12">
               <h3 
-                className="text-[#A68A64] font-light text-2xl tracking-tight"
+                className="text-[#00A3C4] font-light text-2xl tracking-tight"
                 style={{ fontFamily: '"Poppins", sans-serif' }}
               >
                 Inquiries
               </h3>
               <div className="space-y-8">
                 <a href="tel:+919345445898" className="flex items-center space-x-5 text-stone-400 hover:text-white transition-colors group">
-                  <Phone className="w-4 h-4 text-[#A68A64] stroke-[1px] opacity-70" />
+                  <Phone className="w-4 h-4 text-[#00A3C4] stroke-[1px] opacity-70" />
                   <span className="text-sm font-extralight tracking-widest">+91 93454 45898</span>
                 </a>
                 <a href="mailto:astrainterior83@gmail.com" className="flex items-center space-x-5 text-stone-400 hover:text-white transition-colors group">
-                  <Mail className="w-4 h-4 text-[#A68A64] stroke-[1px] opacity-70" />
+                  <Mail className="w-4 h-4 text-[#00A3C4] stroke-[1px] opacity-70" />
                   <span className="text-sm font-extralight tracking-widest">astrainterior83@gmail.com</span>
                 </a>
                 <address className="flex items-start space-x-5 text-stone-400 not-italic">
-                  <MapPin className="w-4 h-4 text-[#A68A64] stroke-[1px] shrink-0 opacity-70" />
+                  <MapPin className="w-4 h-4 text-[#00A3C4] stroke-[1px] shrink-0 opacity-70" />
                   <span className="text-sm font-extralight tracking-widest leading-relaxed">Race Course, Coimbatore,<br />Tamil Nadu, India</span>
                 </address>
               </div>
@@ -123,7 +124,7 @@ export default function Footer() {
 
             <button 
               onClick={handleWhatsAppRedirect}
-              className="mt-16 flex items-center justify-between w-full py-6 bg-[#FAF9F6]/5 border border-white/5 text-white px-8 uppercase tracking-[0.6em] text-[9px] font-black hover:bg-[#A68A64] hover:border-[#A68A64] transition-all duration-700 group overflow-hidden"
+              className="mt-16 flex items-center justify-between w-full py-6 bg-[#FAF9F6]/5 border border-white/5 text-white px-8 uppercase tracking-[0.6em] text-[9px] font-black hover:bg-[#00A3C4] hover:border-[#00A3C4] transition-all duration-700 group overflow-hidden rounded-sm"
             >
               <span className="relative z-10 flex items-center">
                 <MessageSquare className="mr-4 w-3.5 h-3.5 opacity-60" />
@@ -134,7 +135,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* BOTTOM SECTION */}
+        {/* BOTTOM UTILITY BAR */}
         <div className="pt-12 border-t border-white/5">
           <div className="flex flex-col lg:flex-row justify-between items-center gap-10">
             <div className="flex flex-col items-center lg:items-start space-y-2">
@@ -148,7 +149,7 @@ export default function Footer() {
             
             <div className="flex space-x-12">
               {['Privacy', 'Terms', 'Legal'].map((link) => (
-                <Link key={link} to="/contactus" className="text-stone-500 hover:text-[#A68A64] text-[9px] uppercase tracking-[0.3em] transition-colors font-black">
+                <Link key={link} to="/contactus" className="text-stone-500 hover:text-[#00A3C4] text-[9px] uppercase tracking-[0.3em] transition-colors font-black">
                   {link}
                 </Link>
               ))}
@@ -157,10 +158,10 @@ export default function Footer() {
         </div>
       </div>
       
-      {/* LARGE BACKGROUND DECOR */}
-      <div className="absolute -bottom-10 right-10 opacity-[0.03] pointer-events-none select-none" aria-hidden="true">
+      {/* BRAND WATERMARK */}
+      <div className="absolute -bottom-10 right-10 opacity-[0.02] pointer-events-none select-none" aria-hidden="true">
         <span 
-          className="text-[18vw] font-bold leading-none text-white tracking-tighter"
+          className="text-[18vw] font-bold leading-none text-[#1A365D] tracking-tighter"
           style={{ fontFamily: '"Poppins", sans-serif' }}
         >
           ASTRA

@@ -3,12 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowRight, ShoppingBag, CheckCircle2, Star } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// IMPORTED ASSETS: Local optimized WebP files
+// IMPORTED ASSETS
 import Astra1 from '../assests/hero/astra1.webp'; 
 import Astra2 from '../assests/hero/astra2.webp';
 import Astra3 from '../assests/hero/astra3.webp';
 
-const carouselImages = [Astra1, Astra2, Astra3];
+const carouselImages = [
+  { img: Astra1, title: "Modern Minimalism", loc: "Coimbatore" },
+  { img: Astra2, title: "Bespoke Luxury", loc: "Chennai" },
+  { img: Astra3, title: "Architectural Soul", loc: "Tamil Nadu" }
+];
 
 export default function Hero() {
   const [isMounted, setIsMounted] = useState(false);
@@ -17,10 +21,9 @@ export default function Hero() {
 
   useEffect(() => {
     setIsMounted(true);
-    // Automatic slide transition every 6 seconds
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
-    }, 6000);
+    }, 7000);
     return () => clearInterval(timer);
   }, []);
 
@@ -36,107 +39,144 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-[100dvh] flex flex-col justify-center items-center overflow-hidden bg-black"
+      className="relative h-[100svh] w-full flex flex-col justify-center items-center overflow-hidden bg-[#050A0F]"
       style={{ fontFamily: '"Inter", sans-serif' }}
     >
-      {/* --- LAYER 1: CINEMATIC BACKGROUND --- */}
+      {/* --- LAYER 1: KEN BURNS SLIDER ENGINE --- */}
       <div className="absolute inset-0 z-0">
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="popLayout">
           <motion.div
             key={currentSlide}
-            initial={{ opacity: 0, scale: 1.1 }}
-            animate={{ opacity: 0.45, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 2, ease: "easeInOut" }}
+            initial={{ opacity: 0 }}
+            animate={{ 
+              opacity: 0.6,
+              transition: { duration: 1.5, ease: "easeOut" }
+            }}
+            exit={{ 
+              opacity: 0,
+              transition: { duration: 1.5, ease: "easeIn" }
+            }}
             className="absolute inset-0"
           >
-            <img
-              src={carouselImages[currentSlide]}
-              /* FIXED: Removed redundant word 'Image' to clear ESLint warning */
-              alt={`Astra Portfolio Showcase ${currentSlide + 1}`}
-              className="w-full h-full object-cover"
+            {/* The Image zooms from 1.0 to 1.15 over 7 seconds (Ken Burns Effect) */}
+            <motion.img
+              initial={{ scale: 1 }}
+              animate={{ scale: 1.15 }}
+              transition={{ duration: 7, ease: "linear" }}
+              src={carouselImages[currentSlide].img}
+              alt="Astra Interior Showcase"
+              className="w-full h-full object-cover object-center"
             />
           </motion.div>
         </AnimatePresence>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-black/90 z-10" />
+        
+        {/* Layered Gradient for Text Legibility */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90 z-10" />
       </div>
 
-      {/* --- LAYER 2: CENTRAL CONTENT --- */}
-      <div className="relative z-20 max-w-[1400px] mx-auto px-6 text-center pt-20">
+      {/* --- LAYER 2: RESPONSIVE CONTENT CONTAINER --- */}
+      <div className="relative z-20 w-full max-w-[1400px] mx-auto px-6 md:px-12 text-center flex flex-col items-center">
         <motion.div 
-          initial={{ y: 30, opacity: 0 }}
+          initial={{ y: 20, opacity: 0 }}
           animate={isMounted ? { y: 0, opacity: 1 } : {}}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="space-y-8"
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="w-full space-y-6 md:space-y-10"
         >
-          <div className="flex items-center justify-center space-x-3 mb-6">
-            <div className="w-8 lg:w-12 h-[1px] bg-[#A68A64]"></div>
-            <span className="text-[10px] uppercase tracking-[0.5em] text-[#A68A64] font-bold">
+          {/* Tagline */}
+          <div className="flex items-center justify-center space-x-3">
+            <div className="w-6 md:w-12 h-[1px] bg-[#00A3C4]/60" />
+            <span className="text-[9px] md:text-[11px] uppercase tracking-[0.4em] md:tracking-[0.6em] text-[#00A3C4] font-bold">
               Complete Interior Solutions
             </span>
-            <div className="w-8 lg:w-12 h-[1px] bg-[#A68A64]"></div>
+            <div className="w-6 md:w-12 h-[1px] bg-[#00A3C4]/60" />
           </div>
 
+          {/* Main Headline - Responsive Text Sizes */}
           <h1 
-            className="text-4xl md:text-6xl lg:text-8xl font-bold text-white leading-[1.1] tracking-tighter"
+            className="text-[2.5rem] leading-[1.1] md:text-7xl lg:text-[7.5rem] font-bold text-white tracking-tighter drop-shadow-2xl"
             style={{ fontFamily: '"Poppins", sans-serif' }}
           >
-            One Design. One Team. <br />
-            <span className="italic text-stone-400 font-light text-2xl md:text-4xl lg:text-6xl">Fully Finished Interiors.</span>
+            One Design. <br />
+            <span 
+              className="italic font-light text-transparent bg-clip-text bg-gradient-to-r from-[#00A3C4] via-white to-[#00A3C4] opacity-90"
+              style={{ WebkitTextStroke: "0.5px rgba(255,255,255,0.1)" }}
+            >
+              One Expert Team.
+            </span>
           </h1>
 
-          <p className="text-stone-300 text-sm md:text-lg max-w-2xl mx-auto leading-relaxed font-light">
-            Interior design, modular solutions, custom furniture, painting, and electrical — all handled by one expert team across Tamil Nadu. We deliver fully completed interiors you can move into immediately.
+          {/* Subtext - Readable on all devices */}
+          <p className="text-stone-300 text-sm md:text-lg lg:text-xl max-w-2xl mx-auto leading-relaxed font-light px-4">
+            From initial concepts to the last switchboard screw. 
+            Delivering 47+ fully finished sanctuaries across Tamil Nadu.
           </p>
 
-          <div className="flex flex-col sm:flex-row justify-center gap-6 pt-6">
+          {/* Responsive Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6 pt-4 md:pt-8 w-full max-w-md sm:max-w-none">
             <button
               onClick={() => handleNavigation('/contactus')}
-              className="px-10 py-4 bg-white text-black font-bold uppercase tracking-widest text-[10px] hover:bg-[#A68A64] hover:text-white transition-all duration-500 transform-gpu active:scale-95 shadow-2xl"
+              className="w-full sm:w-auto px-8 md:px-12 py-4 md:py-5 bg-white text-[#1A365D] font-black uppercase tracking-widest text-[10px] hover:bg-[#00A3C4] hover:text-white transition-all duration-500 shadow-[0_10px_30px_rgba(0,0,0,0.3)] rounded-full active:scale-95"
             >
-              Get Free Design Consultation
+              Start Your Project
             </button>
 
             <button
               onClick={() => handleNavigation('/port')}
-              className="px-10 py-4 border border-white/30 text-white backdrop-blur-md font-bold uppercase tracking-widest text-[10px] hover:border-white hover:bg-white/10 transition-all duration-500 transform-gpu active:scale-95 flex items-center justify-center"
+              className="w-full sm:w-auto px-8 md:px-12 py-4 md:py-5 border border-white/20 text-white backdrop-blur-md font-bold uppercase tracking-widest text-[10px] hover:bg-white/10 transition-all duration-500 rounded-full flex items-center justify-center group"
             >
-              View Our Projects <ArrowRight className="ml-2 w-4 h-4" />
+              The Portfolio <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
             </button>
           </div>
         </motion.div>
 
-        {/* --- LAYER 3: TRUST BAR --- */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={isMounted ? { opacity: 1 } : {}}
-          transition={{ delay: 1, duration: 1 }}
-          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-8 border-t border-white/10 pt-10"
-        >
-          {[
-            { icon: CheckCircle2, text: '1+ Year Experience' },
-            { icon: ShoppingBag, text: '47+ Projects Finished' },
-            { icon: CheckCircle2, text: 'Homes & Offices across TN' },
-            { icon: Star, text: '4.9★ Client Rating' }
-          ].map((trust, i) => (
-            <div key={i} className="flex flex-col items-center space-y-2 group">
-              <trust.icon className="w-5 h-5 text-[#A68A64] group-hover:scale-110 transition-transform duration-300" />
-              <span className="text-[10px] lg:text-[11px] uppercase tracking-widest text-stone-400 font-medium group-hover:text-white transition-colors">
-                {trust.text}
+        {/* --- LAYER 3: DYNAMIC PROGRESS BAR --- */}
+        <div className="mt-16 md:mt-24 flex justify-center items-center space-x-6 md:space-x-12">
+          {carouselImages.map((slide, idx) => (
+            <button 
+              key={idx} 
+              className="group flex flex-col items-center sm:items-start focus:outline-none" 
+              onClick={() => setCurrentSlide(idx)}
+            >
+              <span className={`hidden sm:block text-[9px] uppercase tracking-widest mb-3 transition-colors duration-500 ${idx === currentSlide ? 'text-[#00A3C4]' : 'text-stone-500 group-hover:text-stone-300'}`}>
+                {slide.title}
               </span>
-            </div>
+              <div className="relative w-12 md:w-32 h-[2px] bg-white/10 overflow-hidden rounded-full">
+                {idx === currentSlide && (
+                  <motion.div 
+                    layoutId="activeSlideBar"
+                    className="absolute inset-0 bg-[#00A3C4]"
+                    initial={{ x: "-100%" }}
+                    animate={{ x: "0%" }}
+                    transition={{ duration: 7, ease: "linear" }}
+                  />
+                )}
+              </div>
+            </button>
           ))}
-        </motion.div>
+        </div>
       </div>
 
-      {/* Slide Navigation (Vertical) */}
-      <div className="absolute bottom-12 right-6 lg:right-12 z-30 flex flex-col space-y-4 items-end">
-        {carouselImages.map((_, idx) => (
-          <div key={idx} className="flex items-center space-x-4 group cursor-pointer" onClick={() => setCurrentSlide(idx)}>
-             <span className={`text-[10px] font-bold transition-all ${idx === currentSlide ? 'text-white translate-x-0' : 'text-stone-600 translate-x-2 opacity-0 group-hover:opacity-100'}`}>0{idx + 1}</span>
-             <div className={`h-8 lg:h-12 w-[2px] transition-all duration-500 ${idx === currentSlide ? 'bg-[#A68A64]' : 'bg-white/10 group-hover:bg-white/30'}`} />
-          </div>
-        ))}
+      {/* --- LAYER 4: RESPONSIVE TRUST HUD --- */}
+      <div className="absolute bottom-6 md:bottom-10 w-full px-6 flex justify-center lg:justify-between items-center z-30 pointer-events-none">
+        <div className="hidden lg:grid grid-cols-4 gap-12 opacity-50">
+          {[
+            { icon: CheckCircle2, text: '1+ Year Advantage' },
+            { icon: ShoppingBag, text: '47+ Finished Homes' },
+            { icon: CheckCircle2, text: 'End-to-End Civil' },
+            { icon: Star, text: '4.9★ Review Score' }
+          ].map((trust, i) => (
+            <div key={i} className="flex items-center space-x-2">
+              <trust.icon className="w-3 h-3 text-[#00A3C4]" />
+              <span className="text-[8px] uppercase tracking-[0.3em] text-white font-bold whitespace-nowrap">{trust.text}</span>
+            </div>
+          ))}
+        </div>
+        
+        {/* Mobile Location Indicator */}
+        <div className="flex items-center space-x-2 lg:opacity-50">
+           <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+           <span className="text-[9px] uppercase tracking-widest text-white/70 font-medium">Currently: {carouselImages[currentSlide].loc}</span>
+        </div>
       </div>
     </section>
   );

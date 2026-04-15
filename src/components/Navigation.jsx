@@ -1,12 +1,16 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { X, ArrowUpRight,} from "lucide-react";
+import { X, ArrowUpRight } from "lucide-react";
 import logo from "../assests/astralogo.webp";
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const observerTarget = useRef(null);
+
+  // Logo Brand Colors - Fixed: Now used in the UI logic below
+  const brandNavy = "#1A365D";
+  const brandTeal = "#00A3C4";
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -43,19 +47,19 @@ export default function Navigation() {
       <div ref={observerTarget} className="absolute top-0 left-0 w-full h-1 pointer-events-none" />
 
       <header
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out bg-white/90 backdrop-blur-md border-b border-stone-100 ${
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out bg-white/95 backdrop-blur-md border-b border-stone-100 ${
           scrolled ? "py-2 shadow-sm" : "py-5"
         }`}
       >
         <div className="max-w-[1600px] mx-auto px-6 lg:px-12 flex items-center justify-between">
           
-          {/* BRANDING SECTION: CLEAN ORIGINAL LOGO */}
+          {/* BRANDING SECTION */}
           <Link to="/" onClick={() => setIsOpen(false)} className="group flex items-center">
             <div className="relative transition-transform duration-500 group-hover:scale-105">
               <img 
                 src={logo} 
                 alt="Astra Studio" 
-                className="h-12 w-auto md:h-14 object-contain" 
+                className="h-10 w-auto md:h-12 object-contain" 
               />
             </div>
           </Link>
@@ -68,13 +72,17 @@ export default function Navigation() {
                 to={link.path}
                 className={({ isActive }) => `
                   relative py-1 text-[10px] uppercase tracking-[0.4em] font-black transition-all duration-300
-                  ${isActive ? "text-[#A68A64]" : "text-black/60 hover:text-black"}
+                  ${isActive ? "text-[var(--teal)]" : "text-[var(--navy)]/70 hover:text-[var(--navy)]"}
                 `}
+                style={{ "--teal": brandTeal, "--navy": brandNavy }} // Using variables to satisfy ESLint
               >
                 {({ isActive }) => (
                   <>
                     {link.name}
-                    <span className={`absolute -bottom-1 left-0 w-full h-[1.5px] bg-[#A68A64] transition-all duration-500 origin-left ${isActive ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-50'}`} />
+                    <span 
+                      className={`absolute -bottom-1 left-0 w-full h-[1.5px] bg-[#00A3C4] transition-all duration-500 origin-left 
+                      ${isActive ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0 group-hover:scale-x-100 group-hover:opacity-50'}`} 
+                    />
                   </>
                 )}
               </NavLink>
@@ -82,7 +90,8 @@ export default function Navigation() {
             
             <Link 
               to="/contactus" 
-              className="px-8 py-3 bg-black text-white rounded-full text-[10px] uppercase tracking-[0.3em] font-black transition-all duration-500 hover:bg-[#A68A64] active:scale-95 shadow-xl"
+              style={{ backgroundColor: brandNavy }} // Variable used here
+              className="px-8 py-3 text-white rounded-full text-[10px] uppercase tracking-[0.3em] font-black transition-all duration-500 hover:bg-[#00A3C4] active:scale-95 shadow-xl"
             >
               Inquire
             </Link>
@@ -94,8 +103,8 @@ export default function Navigation() {
             className="lg:hidden flex flex-col items-end justify-center space-y-1.5 p-2"
             aria-label="Open navigation menu"
           >
-            <div className="w-6 h-[1.5px] bg-black" />
-            <div className="w-4 h-[1.5px] bg-black" />
+            <div className="w-6 h-[1.5px]" style={{ backgroundColor: brandNavy }} />
+            <div className="w-4 h-[1.5px]" style={{ backgroundColor: brandNavy }} />
           </button>
         </div>
       </header>
@@ -108,7 +117,7 @@ export default function Navigation() {
       >
         <div className="flex justify-between items-center px-10 py-10">
           <img src={logo} alt="Astra" className="h-8 w-auto object-contain" />
-          <button onClick={() => setIsOpen(false)} className="h-12 w-12 bg-stone-100 rounded-full flex items-center justify-center text-black hover:bg-black hover:text-white transition-all">
+          <button onClick={() => setIsOpen(false)} className="h-12 w-12 bg-stone-100 rounded-full flex items-center justify-center transition-all hover:bg-black hover:text-white" style={{ color: brandNavy }}>
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -120,13 +129,21 @@ export default function Navigation() {
               to={link.path}
               onClick={() => setIsOpen(false)}
               className={({ isActive }) => `
-                group flex items-center justify-between text-5xl md:text-7xl font-serif transition-all duration-500
-                ${isActive ? "text-[#A68A64]" : "text-black hover:text-stone-400"}
+                group flex items-center justify-between text-5xl md:text-7xl font-light transition-all duration-500
+                ${isActive ? "text-[#00A3C4]" : "text-[#1A365D] hover:text-[#00A3C4]/60"}
               `}
-              style={{ transitionDelay: isOpen ? `${idx * 70}ms` : '0ms' }}
+              style={{ 
+                transitionDelay: isOpen ? `${idx * 70}ms` : '0ms',
+                fontFamily: '"Poppins", sans-serif'
+              }}
             >
-              <span>{link.name}</span>
-              <ArrowUpRight className="w-10 h-10 opacity-20 group-hover:opacity-100 transition-all" />
+              {/* FIXED: isActive is now correctly available here via the render prop pattern */}
+              {({ isActive }) => (
+                <>
+                  <span>{link.name}</span>
+                  <ArrowUpRight className={`w-10 h-10 transition-all ${isActive ? "opacity-100" : "opacity-10 group-hover:opacity-100"}`} />
+                </>
+              )}
             </NavLink>
           ))}
         </nav>
@@ -135,7 +152,7 @@ export default function Navigation() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-center md:text-left">
             <div className="space-y-1">
               <p className="text-[9px] uppercase tracking-[0.4em] text-stone-400 font-bold">Project Desk</p>
-              <a href="mailto:astrainterior83@gmail.com" className="text-sm text-black hover:text-[#A68A64] transition-colors font-medium">astrainterior83@gmail.com</a>
+              <a href="mailto:astrainterior83@gmail.com" style={{ color: brandNavy }} className="text-sm hover:text-[#00A3C4] transition-colors font-medium">astrainterior83@gmail.com</a>
             </div>
             <div className="flex items-end justify-center md:justify-end">
                <span className="text-[10px] text-stone-300 uppercase tracking-[0.5em]">Race Course, Coimbatore</span>

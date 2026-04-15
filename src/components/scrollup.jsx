@@ -5,6 +5,10 @@ export default function BackToTop() {
   const [isVisible, setIsVisible] = useState(false);
   const observerTarget = useRef(null);
 
+  // Integrated Brand Colors
+  const brandNavy = "#1A365D";
+  const brandTeal = "#00A3C4";
+
   useEffect(() => {
     // Zero-Reflow Logic: 
     // Uses the browser's native Compositor thread instead of the JS Main thread.
@@ -46,16 +50,36 @@ export default function BackToTop() {
         <button
           onClick={scrollToTop}
           aria-label="Back to top"
-          className="group relative flex items-center justify-center w-14 h-14 bg-[#2C1E14]/80 backdrop-blur-xl border border-white/10 rounded-full hover:border-[#A68A64] hover:bg-[#2C1E14] transition-all duration-500 shadow-2xl overflow-hidden"
+          className="group relative flex items-center justify-center w-14 h-14 backdrop-blur-xl border border-white/10 rounded-full transition-all duration-500 shadow-2xl overflow-hidden"
+          style={{ backgroundColor: `${brandNavy}CC` }} // 80% opacity Navy
+          onMouseEnter={(e) => {
+            e.currentTarget.style.borderColor = brandTeal;
+            e.currentTarget.style.backgroundColor = brandNavy;
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
+            e.currentTarget.style.backgroundColor = `${brandNavy}CC`;
+          }}
         >
-          {/* Hardware Accelerated Icon */}
-          <ChevronUp className="w-6 h-6 text-[#A68A64] group-hover:-translate-y-1 group-hover:text-white transition-all duration-500 transform-gpu" />
+          {/* Hardware Accelerated Icon in Brand Teal */}
+          <ChevronUp 
+            className="w-6 h-6 transition-all duration-500 transform-gpu" 
+            style={{ color: brandTeal }}
+            onMouseEnter={(e) => e.currentTarget.style.color = "#FFFFFF"}
+            onMouseLeave={(e) => e.currentTarget.style.color = brandTeal}
+          />
 
-          {/* Animated Ambient Ring */}
-          <div className="absolute inset-0 rounded-full border border-[#A68A64]/20 animate-[ping_3s_linear_infinite] opacity-50 pointer-events-none" />
+          {/* Animated Ambient Ring in Brand Teal */}
+          <div 
+            className="absolute inset-0 rounded-full border animate-[ping_3s_linear_infinite] opacity-50 pointer-events-none" 
+            style={{ borderColor: `${brandTeal}33` }} 
+          />
           
-          {/* Luxury Hover Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#A68A64]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          {/* Luxury Hover Gradient using Brand Teal */}
+          <div 
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" 
+            style={{ background: `linear-gradient(to top, ${brandTeal}33, transparent)` }}
+          />
         </button>
       </div>
     </>

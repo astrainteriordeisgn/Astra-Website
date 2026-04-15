@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, {lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // Layout components
@@ -17,14 +17,6 @@ const PortfolioPage = lazy(() => import('./components/pages/portfolio'));
 const Services = lazy(() => import('./components/Services'));
 const ThankYou = lazy(() => import('./components/Thankyoupage'));
 
-// Branded Astra Spinner
-const PageLoader = () => (
-  <div style={{ height: '100dvh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', backgroundColor: '#2C1E14' }}>
-    <div className="w-12 h-12 border-4 border-[#A68A64]/20 border-t-[#A68A64] rounded-full animate-spin mb-4"></div>
-    <div style={{ color: '#fff', fontFamily: 'Playfair Display', letterSpacing: '0.2em', fontSize: '12px' }}>ASTRA</div>
-  </div>
-);
-
 function App() {
   return (
     <Router>
@@ -34,9 +26,7 @@ function App() {
       <Whatsapp />
       <Scrollup />  
       
-      {/* 2. FIX: Document Landmark - wrapping routes in <main> for Accessibility & SEO */}
-      <main id="main-content" role="main">
-        <Suspense fallback={<PageLoader />}>
+
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/about" element={<Aboutus />} />
@@ -46,9 +36,8 @@ function App() {
             <Route path="/services" element={<Services />} />
             <Route path="/thank-you" element={<ThankYou />} />
           </Routes>
-        </Suspense>
-      </main>
       
+    
       <Footer />
     </Router>
   );

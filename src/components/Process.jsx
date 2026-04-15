@@ -36,10 +36,10 @@ export default function HyperrealisticFlute() {
         </div>
       ))}
 
-      {/* --- LAYER 2: THE "FLUTE BODY" OVERLAY (Hidden on Mobile) --- */}
+      {/* --- LAYER 2: THE "FLUTE BODY" OVERLAY (Brand Teal Accent) --- */}
       <div className="absolute top-1/2 left-0 w-full h-[1px] bg-white/10 z-10 hidden lg:block">
         <div 
-          className="h-full bg-[#A68A64] shadow-[0_0_20px_#A68A64] transition-all duration-700 ease-out"
+          className="h-full bg-[#00A3C4] shadow-[0_0_20px_#00A3C4] transition-all duration-700 ease-out"
           style={{ width: `${((active + 1) / steps.length) * 100}%` }}
         />
       </div>
@@ -47,11 +47,11 @@ export default function HyperrealisticFlute() {
       {/* --- LAYER 3: CENTRAL CONTENT --- */}
       <div className="relative z-20 max-w-[1400px] w-full px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
         
-        {/* Left: Metadata & Typography */}
+        {/* Left: Metadata & Typography (Brand Teal & Navy/White mix) */}
         <div className="space-y-6 lg:space-y-8 text-center lg:text-left">
           <div className="flex items-center justify-center lg:justify-start space-x-4">
-            <span className="text-[10px] lg:text-sm font-mono text-[#A68A64] tracking-[0.3em] lg:tracking-[0.5em] uppercase">Phase_{steps[active].id}</span>
-            <div className="h-[1px] w-8 lg:w-12 bg-[#A68A64]" />
+            <span className="text-[10px] lg:text-sm font-mono text-[#00A3C4] tracking-[0.3em] lg:tracking-[0.5em] uppercase">Phase_{steps[active].id}</span>
+            <div className="h-[1px] w-8 lg:w-12 bg-[#00A3C4]" />
           </div>
           
           <h2 className="text-5xl md:text-7xl lg:text-9xl font-serif leading-none tracking-tighter text-white">
@@ -68,8 +68,8 @@ export default function HyperrealisticFlute() {
               onClick={() => navigate('/services')}
               className="flex items-center justify-center lg:justify-start space-x-4 group text-white outline-none"
             >
-               <span className="uppercase text-[10px] tracking-[0.4em] font-bold group-hover:text-[#A68A64] transition-colors">View Services</span>
-               <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:border-[#A68A64] transition-all">
+               <span className="uppercase text-[10px] tracking-[0.4em] font-bold group-hover:text-[#00A3C4] transition-colors">View Services</span>
+               <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:border-[#00A3C4] transition-all">
                   <MoveRight className="w-4 h-4" />
                </div>
             </button>
@@ -78,18 +78,18 @@ export default function HyperrealisticFlute() {
               onClick={handleWhatsAppRedirect}
               className="flex items-center justify-center lg:justify-start space-x-4 group text-white outline-none"
             >
-               <span className="uppercase text-[10px] tracking-[0.4em] font-bold group-hover:text-[#25D366] transition-colors">Quick Inquiry</span>
-               <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:border-[#25D366] transition-all">
+               <span className="uppercase text-[10px] tracking-[0.4em] font-bold group-hover:text-[#00A3C4] transition-colors">Quick Inquiry</span>
+               <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:border-[#00A3C4] transition-all">
                   <MessageSquare className="w-4 h-4" />
                </div>
             </button>
           </div>
         </div>
 
-        {/* Right: Technical Image Monitor (Hidden on Mobile) */}
+        {/* Right: Technical Image Monitor (Brand Navy Background Blur) */}
         <div className="relative hidden lg:block">
             <div className="aspect-[4/5] w-full max-w-[450px] ml-auto relative">
-              <div className="absolute inset-0 bg-[#A68A64]/20 blur-[100px] rounded-full" />
+              <div className="absolute inset-0 bg-[#1A365D]/20 blur-[100px] rounded-full" />
               
               <div className="relative h-full w-full border border-white/10 p-4 bg-black/40 backdrop-blur-3xl overflow-hidden group">
                  {steps.map((step, idx) => (
@@ -102,8 +102,8 @@ export default function HyperrealisticFlute() {
                       }`}
                     />
                  ))}
-                 <div className="absolute top-8 left-8 border-l border-t border-[#A68A64] w-8 h-8" />
-                 <div className="absolute bottom-8 right-8 border-r border-b border-[#A68A64] w-8 h-8" />
+                 <div className="absolute top-8 left-8 border-l border-t border-[#00A3C4] w-8 h-8" />
+                 <div className="absolute bottom-8 right-8 border-r border-b border-[#00A3C4] w-8 h-8" />
                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                     <div className="w-24 h-24 border border-white/5 rounded-full flex items-center justify-center animate-spin-slow">
                         <Target className="w-4 h-4 text-white/20" />
@@ -114,8 +114,7 @@ export default function HyperrealisticFlute() {
         </div>
       </div>
 
-      {/* --- LAYER 4: THE FLUTE KEYS (NAVIGATION) --- */}
-      {/* Added horizontal scroll for mobile and fixed positioning */}
+      {/* --- LAYER 4: THE FLUTE KEYS (Navigation with Brand Teal) --- */}
       <div className="absolute bottom-6 lg:bottom-12 left-0 w-full z-30 overflow-x-auto no-scrollbar px-6 lg:px-0">
         <div className="flex items-end justify-start lg:justify-center space-x-8 md:space-x-12 min-w-max mx-auto">
           {steps.map((step, idx) => (
@@ -124,13 +123,13 @@ export default function HyperrealisticFlute() {
               onClick={() => setActive(idx)}
               className="group flex flex-col items-center space-y-4 outline-none pb-4"
             >
-              <span className={`text-[9px] lg:text-[10px] font-mono transition-all duration-500 whitespace-nowrap ${active === idx ? "text-[#A68A64] -translate-y-1 lg:-translate-y-2" : "text-stone-600 opacity-0"}`}>
+              <span className={`text-[9px] lg:text-[10px] font-mono transition-all duration-500 whitespace-nowrap ${active === idx ? "text-[#00A3C4] -translate-y-1 lg:-translate-y-2" : "text-stone-600 opacity-0"}`}>
                 {step.title}
               </span>
               <div className={`
                 w-10 h-10 lg:w-14 lg:h-14 rounded-full border transition-all duration-500 flex items-center justify-center transform-gpu
                 ${active === idx 
-                  ? "bg-[#A68A64] border-[#A68A64] shadow-[0_0_30px_rgba(166,138,100,0.5)] scale-110" 
+                  ? "bg-[#00A3C4] border-[#00A3C4] shadow-[0_0_30px_rgba(0,163,196,0.5)] scale-110" 
                   : "bg-transparent border-white/10 hover:border-white/40"
                 }
               `}>
@@ -142,9 +141,9 @@ export default function HyperrealisticFlute() {
         </div>
       </div>
 
-      {/* Background Watermark (Responsive sizing) */}
+      {/* Background Watermark in Brand Navy */}
       <div className="absolute top-1/2 right-[-5%] -translate-y-1/2 opacity-[0.01] lg:opacity-[0.02] pointer-events-none rotate-90 select-none">
-        <h2 className="text-[40vw] lg:text-[25vw] font-serif text-white tracking-tighter uppercase leading-none">Astra</h2>
+        <h2 className="text-[40vw] lg:text-[25vw] font-serif text-[#1A365D] tracking-tighter uppercase leading-none">Astra</h2>
       </div>
 
       <style jsx>{`
