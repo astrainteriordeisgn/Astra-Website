@@ -1,29 +1,37 @@
-import React, { useState, useEffect, useRef } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { ChevronUp } from 'lucide-react';
 
 export default function BackToTop() {
   const [isVisible, setIsVisible] = useState(false);
-  const observerTarget = useRef(null);
+  const [isHovered, setIsHovered] = useState(false);
 
-  // Integrated Brand Colors
-  const brandNavy = "#1A365D";
-  const brandTeal = "#00A3C4";
+  const brandNavy = '#1A365D';
+  const brandTeal = '#00A3C4';
 
   useEffect(() => {
-    // Zero-Reflow Logic: 
-    // Uses the browser's native Compositor thread instead of the JS Main thread.
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(!entry.isIntersecting);
-      },
-      { threshold: 0 }
-    );
+    let ticking = false;
 
-    if (observerTarget.current) {
-      observer.observe(observerTarget.current);
-    }
+    const updateVisibility = () => {
+      if (ticking) return;
 
-    return () => observer.disconnect();
+      ticking = true;
+
+      window.requestAnimationFrame(() => {
+        setIsVisible(window.scrollY > 500);
+        ticking = false;
+      });
+    };
+
+    updateVisibility();
+
+    window.addEventListener('scroll', updateVisibility, {
+      passive: true,
+    });
+
+    return () => {
+      window.removeEventListener('scroll', updateVisibility);
+    };
   }, []);
 
   const scrollToTop = () => {
@@ -34,54 +42,79 @@ export default function BackToTop() {
   };
 
   return (
-    <>
-      {/* SENTINEL: Invisible marker placed 500px from the top */}
-      <div 
-        ref={observerTarget} 
-        className="absolute top-[500px] left-0 w-1 h-1 pointer-events-none" 
+    <button
+      type="button"
+      onClick={scrollToTop}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onFocus={() => setIsHovered(true)}
+      onBlur={() => setIsHovered(false)}
+      aria-label="Back to top"
+      aria-hidden={!isVisible}
+      tabIndex={isVisible ? 0 : -1}
+      className={`
+        group fixed bottom-5 left-5 sm:bottom-8 sm:left-8
+        z-[1000] flex h-12 w-12 sm:h-14 sm:w-14
+        items-center justify-center overflow-hidden rounded-full
+        border backdrop-blur-xl
+        transition-all duration-500
+        ease-[cubic-bezier(0.23,1,0.32,1)]
+        focus-visible:outline-none
+        focus-visible:ring-2 focus-visible:ring-offset-2
+        ${isVisible
+          ? 'translate-y-0 scale-100 opacity-100'
+          : 'pointer-events-none translate-y-6 scale-90 opacity-0'
+        }
+      `}
+      style={{
+        backgroundColor: isHovered ? brandNavy : `${brandNavy}E6`,
+        borderColor: isHovered
+          ? brandTeal
+          : 'rgba(255,255,255,0.15)',
+        '--tw-ring-color': brandTeal,
+      }}
+    >
+      {/* Hover gradient */}
+      <span
         aria-hidden="true"
+        className="
+          absolute inset-0 rounded-full opacity-0
+          transition-opacity duration-300
+          group-hover:opacity-100
+        "
+        style={{
+          background: `linear-gradient(
+            135deg,
+            ${brandTeal}40,
+            transparent 70%
+          )`,
+        }}
       />
 
-      <div 
-        className={`fixed bottom-8 left-8 z-[1000] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] transform-gpu ${
-          isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-10 scale-90 pointer-events-none'
-        }`}
-      >
-        <button
-          onClick={scrollToTop}
-          aria-label="Back to top"
-          className="group relative flex items-center justify-center w-14 h-14 backdrop-blur-xl border border-white/10 rounded-full transition-all duration-500 shadow-2xl overflow-hidden"
-          style={{ backgroundColor: `${brandNavy}CC` }} // 80% opacity Navy
-          onMouseEnter={(e) => {
-            e.currentTarget.style.borderColor = brandTeal;
-            e.currentTarget.style.backgroundColor = brandNavy;
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
-            e.currentTarget.style.backgroundColor = `${brandNavy}CC`;
-          }}
-        >
-          {/* Hardware Accelerated Icon in Brand Teal */}
-          <ChevronUp 
-            className="w-6 h-6 transition-all duration-500 transform-gpu" 
-            style={{ color: brandTeal }}
-            onMouseEnter={(e) => e.currentTarget.style.color = "#FFFFFF"}
-            onMouseLeave={(e) => e.currentTarget.style.color = brandTeal}
-          />
+      {/* Subtle ambient ring */}
+      <span
+        aria-hidden="true"
+        className="
+          absolute inset-0 rounded-full border
+          opacity-0 transition-opacity duration-300
+          group-hover:opacity-100
+        "
+        style={{ borderColor: `${brandTeal}80` }}
+      />
 
-          {/* Animated Ambient Ring in Brand Teal */}
-          <div 
-            className="absolute inset-0 rounded-full border animate-[ping_3s_linear_infinite] opacity-50 pointer-events-none" 
-            style={{ borderColor: `${brandTeal}33` }} 
-          />
-          
-          {/* Luxury Hover Gradient using Brand Teal */}
-          <div 
-            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" 
-            style={{ background: `linear-gradient(to top, ${brandTeal}33, transparent)` }}
-          />
-        </button>
-      </div>
-    </>
+      {/* Arrow icon */}
+      <ChevronUp
+        size={24}
+        strokeWidth={2.5}
+        aria-hidden="true"
+        className="
+          relative z-10 transition-transform duration-300
+          group-hover:-translate-y-0.5
+        "
+        style={{
+          color: isHovered ? '#FFFFFF' : brandTeal,
+        }}
+      />
+    </button>
   );
 }

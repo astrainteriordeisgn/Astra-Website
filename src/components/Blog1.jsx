@@ -1,159 +1,348 @@
-import { useEffect, useState } from "react";
-import { ExternalLink, MoveRight } from "lucide-react";
-import Lenis from "@studio-freight/lenis";
+
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { ArrowUpRight, ArrowRight } from "lucide-react";
 
 const articles = [
   {
-    title: "The Alchemy of Light & Shadow",
-    description: "How strategic lighting can redefine the architectural boundaries of your living space.",
-    author: "Elena Rossi",
-    date: "Feb 2026",
-    image: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&q=80&w=800",
-    tags: ["Atmosphere", "Lighting"],
+    id: 1,
+    category: "Home Interior Design",
+    eyebrow: "Design Guide",
+    title: "How to Plan Your Home Interiors in Coimbatore",
+    description:
+      "Explore practical home interior design ideas, space planning, furniture selection and finishes to create a comfortable home that suits your lifestyle.",
+    image:
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=85&w=1200",
+    alt: "Modern living room with elegant furniture, indoor plants and natural lighting",
+    href: "/blog/home-interior-design-coimbatore",
+    keywords:
+      "home interior design Coimbatore, interior designers in Coimbatore, modern home interiors",
   },
   {
-    title: "Milling the Future: Sustainable Oak",
-    description: "A deep dive into our ethical sourcing of heirloom-quality timber from European forests.",
-    author: "Marcus Thorne",
-    date: "Jan 2026",
-    image: "https://images.unsplash.com/photo-1611269154421-4e27233ac5c7?auto=format&fit=crop&q=80&w=800",
-    tags: ["Materials", "Craft"],
+    id: 2,
+    category: "Interior Lighting",
+    eyebrow: "Lighting Guide",
+    title: "Lighting Ideas That Transform Interior Spaces",
+    description:
+      "Discover how natural light, ambient lighting, task lights and decorative fixtures can improve the comfort and appearance of your home.",
+    image:
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=85&w=1200",
+    alt: "Contemporary residential interior with layered lighting and refined finishes",
+    href: "/blog/interior-lighting-design",
+    keywords:
+      "interior lighting design, home lighting ideas, residential interior design",
   },
   {
-    title: "Minimalism: The Art of Enough",
-    description: "Curating a home that breathes. Why fewer objects lead to a more soulful environment.",
-    author: "Sophia Chen",
-    date: "Dec 2025",
-    image: "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&q=80&w=800",
-    tags: ["Philosophy", "Minimalism"],
+    id: 3,
+    category: "Furniture Design",
+    eyebrow: "Furniture Guide",
+    title: "Modern Furniture and Space-Saving Ideas",
+    description:
+      "Learn how functional furniture, smart storage and carefully planned layouts can help make small and large homes more organised.",
+    image:
+      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=85&w=1200",
+    alt: "Modern home interior with coordinated furniture and thoughtful space planning",
+    href: "/blog/modern-furniture-design-ideas",
+    keywords:
+      "custom furniture design, space-saving furniture, modern home interior ideas",
   },
 ];
 
+const seoServices = [
+  "Home and villa interior design",
+  "Residential and commercial interiors",
+  "Furniture design and sofa redesign",
+  "Electrical and lighting work",
+  "Interior painting and finishing",
+  "Space planning and material selection",
+];
+
 export default function DesignJournal() {
-  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const lenis = new Lenis({ smooth: true, lerp: 0.1 });
-    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
-    requestAnimationFrame(raf);
-    return () => lenis.destroy();
-  }, []);
-
-  useEffect(() => {
-    const handleMouseMove = (e) => setCursorPos({ x: e.clientX, y: e.clientY });
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+  const navigate = useNavigate();
 
   return (
-    <section 
-      className="relative py-32 bg-[#FAF9F6] overflow-hidden"
-      style={{ fontFamily: '"Inter", sans-serif' }}
+    <main
+      id="design-journal"
+      className="relative isolate overflow-hidden bg-[#F7F7F5] text-[#202020]"
+      style={{ fontFamily: '"Poppins", sans-serif' }}
     >
-      
-      {/* SVG BACKGROUND: WEAVE TEXTURE using Brand Navy */}
-      <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none">
-        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-          <pattern id="weave" width="40" height="40" patternUnits="userSpaceOnUse">
-            <path d="M0 20 L40 20 M20 0 L20 40" fill="none" stroke="#1A365D" strokeWidth="0.5" />
-          </pattern>
-          <rect width="100%" height="100%" fill="url(#weave)" />
-        </svg>
-      </div>
-
-      <div className="relative z-10 max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16">
-        
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-8">
-          <div className="max-w-2xl">
-            <div className="flex items-center space-x-4 mb-8">
-              {/* Brand Teal Accent Line */}
-              <div className="w-12 h-[1px] bg-[#00A3C4]"></div>
-              <span className="text-[#00A3C4] uppercase tracking-[0.6em] text-[10px] font-black">The Astra Journal</span>
-            </div>
-            <h2 
-              className="text-6xl md:text-8xl font-bold text-[#1A365D] leading-[0.9] tracking-tighter"
-              style={{ fontFamily: '"Poppins", sans-serif' }}
-            >
-              Curated <br />
-              <span className="italic font-light text-[#00A3C4]">Insights</span>
-            </h2>
-          </div>
-          <button className="group flex items-center space-x-3 text-stone-400 hover:text-[#1A365D] transition-all uppercase tracking-[0.4em] text-[10px] font-black border-b border-stone-200 pb-4">
-            <span>View All Articles</span>
-            <MoveRight className="w-4 h-4 group-hover:translate-x-3 transition-transform text-[#00A3C4]" />
-          </button>
-        </div>
-
-        {/* Journal Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
-          {articles.map((article, idx) => (
-            <div
-              key={idx}
-              className="group flex flex-col bg-white border border-stone-100 shadow-sm hover:shadow-[40px_40px_80px_rgba(26,54,93,0.08)] transition-all duration-700"
-            >
-              <div className="relative h-[450px] overflow-hidden">
-                <img
-                  src={article.image}
-                  alt={article.title}
-                  className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 grayscale-[0.4] group-hover:grayscale-0"
-                />
-                <div className="absolute top-8 left-8 bg-white px-5 py-2 shadow-xl border-l-2 border-[#00A3C4]">
-                   <span className="text-[9px] uppercase tracking-[0.3em] text-[#00A3C4] font-black">{article.tags[0]}</span>
-                </div>
-                <div className="absolute inset-0 bg-[#1A365D]/10 group-hover:bg-transparent transition-colors duration-500"></div>
-              </div>
-
-              <div className="p-12 flex flex-col flex-1">
-                <div className="flex items-center space-x-4 text-[10px] uppercase tracking-[0.2em] text-stone-400 mb-8 font-bold">
-                  <span>By {article.author}</span>
-                  <div className="w-6 h-[1px] bg-stone-200"></div>
-                  <span className="text-[#00A3C4]">{article.date}</span>
-                </div>
-                
-                <h3 
-                  className="text-3xl font-bold text-[#1A365D] mb-8 leading-[1.2] group-hover:text-[#00A3C4] transition-colors tracking-tight"
-                  style={{ fontFamily: '"Poppins", sans-serif' }}
-                >
-                  {article.title}
-                </h3>
-                
-                <p className="text-stone-500 font-light leading-relaxed mb-10 flex-1 text-base">
-                  {article.description}
-                </p>
-
-                <a
-                  href="/blog"
-                  className="inline-flex items-center text-[10px] uppercase tracking-[0.5em] font-black text-[#1A365D] group-hover:text-[#00A3C4] transition-all pt-4 border-t border-stone-50"
-                >
-                  Read Journal
-                  <ExternalLink className="ml-4 w-3.5 h-3.5 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* BACKGROUND WATERMARK in Brand Navy */}
-      <div className="absolute -bottom-10 left-0 w-full overflow-hidden pointer-events-none select-none opacity-[0.03]">
-        <h2 
-          className="text-[22vw] font-bold leading-none text-[#1A365D] tracking-tighter"
-          style={{ fontFamily: '"Poppins", sans-serif' }}
-        >
-          EDITORIAL
-        </h2>
-      </div>
-
-      {/* CUSTOM CURSOR FOLLOWER in Brand Teal */}
+      {/* SUBTLE ARCHITECTURAL GRID */}
       <div
-        className="fixed w-64 h-64 bg-[#00A3C4]/10 rounded-full blur-[100px] pointer-events-none z-0"
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10"
         style={{
-          left: 0,
-          top: 0,
-          transform: `translate3d(${cursorPos.x - 128}px, ${cursorPos.y - 128}px, 0)`,
+          backgroundImage:
+            "linear-gradient(rgba(30,30,30,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(30,30,30,0.045) 1px, transparent 1px)",
+          backgroundSize: "72px 72px",
         }}
       />
-    </section>
+
+      {/* JOURNAL HEADER */}
+      <section className="relative z-10 px-5 pb-10 pt-20 sm:px-8 sm:pb-14 sm:pt-24 lg:px-16 lg:pt-28">
+        <div className="mx-auto max-w-[1440px]">
+          <div className="grid items-end gap-7 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+            <div>
+              <div className="mb-5 flex items-center gap-3">
+                <span className="h-[3px] w-9 shrink-0 rounded-full bg-[#00A3C4]" />
+
+                <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#374151]">
+                  The Design Journal
+                </span>
+              </div>
+
+              <h1 className="max-w-[850px] text-4xl font-semibold leading-[1.12] tracking-[-0.055em] text-[#171717] sm:text-5xl md:text-6xl lg:text-7xl">
+                Ideas for better
+                <br />
+                <span className="font-medium italic text-[#0089A6]">
+                  living spaces.
+                </span>
+              </h1>
+            </div>
+
+            <div className="max-w-[520px] lg:justify-self-end">
+              <p className="text-base font-medium leading-8 text-[#374151] sm:text-lg sm:leading-9">
+                Explore practical interior design tips, furniture ideas,
+                lighting inspiration and space-planning guides from Astra
+                Interior. Discover ideas for homes, villas and workspaces
+                in Coimbatore and beyond.
+              </p>
+
+              <button
+                type="button"
+                onClick={() => navigate("/services")}
+                className="group mt-5 inline-flex min-h-[48px] items-center gap-3 rounded-md border border-[#1A365D] bg-[#1A365D] px-5 py-3 text-xs font-bold uppercase tracking-[0.12em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-[#00A3C4] hover:bg-[#00A3C4] hover:shadow-lg"
+              >
+                Explore Our Services
+                <ArrowUpRight
+                  size={17}
+                  className="shrink-0 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                />
+              </button>
+            </div>
+          </div>
+
+          <div className="mt-9 flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-[#DADAD6] pt-5 sm:mt-12">
+            <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#374151]">
+              Interior Design
+            </span>
+
+            <span className="h-1 w-1 rounded-full bg-[#00A3C4]" />
+
+            <span className="text-sm font-semibold text-[#374151]">
+              Coimbatore, Tamil Nadu
+            </span>
+
+            <span className="h-1 w-1 rounded-full bg-[#00A3C4]" />
+
+            <span className="text-sm font-medium text-[#374151]">
+              Ideas, Guides & Inspiration
+            </span>
+          </div>
+        </div>
+      </section>
+
+      {/* ARTICLE GRID */}
+      <section
+        aria-labelledby="journal-articles-heading"
+        className="relative z-10 px-5 pb-16 sm:px-8 sm:pb-24 lg:px-16"
+      >
+        <div className="mx-auto max-w-[1440px]">
+          <div className="mb-7 flex flex-col gap-3 border-b border-[#DADAD6] pb-5 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#475569]">
+                From the Journal
+              </p>
+
+              <h2
+                id="journal-articles-heading"
+                className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-[#171717] sm:text-3xl"
+              >
+                Design ideas worth exploring
+              </h2>
+            </div>
+
+            <p className="max-w-[390px] text-sm font-medium leading-7 text-[#374151] sm:text-base">
+              Practical inspiration to help you plan a home that looks good
+              and works for everyday living.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-3 lg:gap-x-8">
+            {articles.map((article) => (
+              <article
+                key={article.id}
+                className="group min-w-0 overflow-hidden rounded-xl border border-[#DEDED9] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#00A3C4]/50 hover:shadow-xl"
+              >
+                {/* ARTICLE IMAGE */}
+                <div className="relative aspect-[4/3] overflow-hidden bg-[#E8E5DF]">
+                  <img
+                    src={article.image}
+                    alt={article.alt}
+                    loading={article.id === 1 ? "eager" : "lazy"}
+                    decoding="async"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.045]"
+                  />
+
+                  {/* CATEGORY LABEL */}
+                  <span
+                    className="absolute left-3 top-3 z-10 inline-flex max-w-[calc(100%-24px)] items-center rounded-md bg-white px-3 py-2 text-[10px] font-bold uppercase tracking-[0.12em] text-[#111111] shadow-sm sm:left-4 sm:top-4"
+                  >
+                    {article.category}
+                  </span>
+
+                  <button
+                    type="button"
+                    onClick={() => navigate(article.href)}
+                    aria-label={`Read ${article.title}`}
+                    className="absolute bottom-3 right-3 z-10 flex h-11 w-11 items-center justify-center rounded-lg bg-[#1A365D] text-white shadow-md transition-all duration-300 hover:scale-105 hover:bg-[#00A3C4] sm:bottom-4 sm:right-4"
+                  >
+                    <ArrowUpRight size={19} />
+                  </button>
+                </div>
+
+                {/* ARTICLE DETAILS */}
+                <div className="p-5 sm:p-6">
+                  <div className="mb-4 flex items-center gap-3">
+                    <span className="h-[2px] w-5 shrink-0 rounded-full bg-[#00A3C4]" />
+
+                    <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#475569]">
+                      {article.eyebrow}
+                    </span>
+                  </div>
+
+                  <h3 className="text-xl font-semibold leading-[1.4] tracking-[-0.025em] text-[#171717] sm:text-[21px]">
+                    <button
+                      type="button"
+                      onClick={() => navigate(article.href)}
+                      className="text-left transition-colors duration-300 hover:text-[#0089A6]"
+                    >
+                      {article.title}
+                    </button>
+                  </h3>
+
+                  <p className="mt-3 text-sm font-medium leading-7 text-[#374151] sm:text-base">
+                    {article.description}
+                  </p>
+
+                  <div className="mt-5 border-t border-[#E7E7E2] pt-4">
+                    <button
+                      type="button"
+                      onClick={() => navigate(article.href)}
+                      className="group/link inline-flex min-h-[40px] items-center gap-2 text-[11px] font-bold uppercase tracking-[0.12em] text-[#1A365D] transition-colors hover:text-[#0089A6]"
+                    >
+                      Read Article
+                      <ArrowRight
+                        size={15}
+                        className="transition-transform duration-300 group-hover/link:translate-x-1"
+                      />
+                    </button>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SEO CONTENT */}
+      <section className="relative z-10 border-y border-[#DADAD6] bg-[#EEF3F5] px-5 py-14 sm:px-8 sm:py-20 lg:px-16">
+        <div className="mx-auto grid max-w-[1440px] gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+          <div>
+            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#0089A6]">
+              Interior Design in Coimbatore
+            </p>
+
+            <h2 className="mt-4 text-3xl font-semibold leading-tight tracking-[-0.045em] text-[#1A365D] sm:text-4xl">
+              Inspiration for your next interior project
+            </h2>
+          </div>
+
+          <div>
+            <p className="text-base font-medium leading-8 text-[#374151]">
+              Astra Interior shares ideas and guidance for planning
+              residential interiors, villa interiors and commercial spaces
+              in Coimbatore, Tamil Nadu. Explore home interior design ideas,
+              furniture selection, lighting, colour combinations and
+              practical space planning before making decisions for your
+              property.
+            </p>
+
+            <p className="mt-4 text-base font-medium leading-8 text-[#374151]">
+              The right interior design depends on how you use your space,
+              your preferred style, available dimensions and budget. Our
+              services include interior design, furniture and sofa
+              redesign, electrical and lighting work, painting and
+              finishing. Discuss your requirements with our team to
+              identify a suitable approach for your home or workspace.
+            </p>
+
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              {seoServices.map((service) => (
+                <div key={service} className="flex items-start gap-3">
+                  <span className="mt-[9px] h-2 w-2 shrink-0 rounded-full bg-[#00A3C4]" />
+
+                  <span className="text-sm font-semibold leading-7 text-[#374151]">
+                    {service}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            <button
+              type="button"
+              onClick={() => navigate("/services")}
+              className="group mt-7 inline-flex min-h-[50px] items-center gap-3 rounded-md bg-[#1A365D] px-5 py-3 text-xs font-bold uppercase tracking-[0.12em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#00A3C4] hover:shadow-lg"
+            >
+              View Our Services
+              <ArrowUpRight
+                size={17}
+                className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* PROJECT CTA */}
+      <section className="relative z-10 px-5 py-14 sm:px-8 sm:py-20 lg:px-16">
+        <div className="mx-auto max-w-[1440px] overflow-hidden rounded-2xl bg-[#1A365D] px-6 py-10 text-white shadow-xl shadow-[#1A365D]/10 sm:px-10 sm:py-14 lg:px-14 lg:py-16">
+          <div className="grid gap-7 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-12">
+            <div>
+              <div className="mb-4 flex items-center gap-3">
+                <span className="h-[3px] w-8 rounded-full bg-[#00A3C4]" />
+
+                <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-cyan-200">
+                  Your Space, Your Vision
+                </span>
+              </div>
+
+              <h2 className="max-w-[720px] text-3xl font-semibold leading-tight tracking-[-0.045em] sm:text-4xl lg:text-5xl">
+                Planning your home interiors?
+                <span className="mt-1 block font-medium italic text-cyan-200">
+                  Let’s talk about your ideas.
+                </span>
+              </h2>
+
+              <p className="mt-4 max-w-[620px] text-base font-medium leading-8 text-white/90 sm:text-lg">
+                Discuss your interior design requirements, preferred
+                finishes and project goals with Astra Interior.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => navigate("/services")}
+              className="group inline-flex min-h-[54px] w-full items-center justify-between gap-5 rounded-lg border border-white/30 bg-white px-5 py-4 text-sm font-bold text-[#1A365D] transition-all duration-300 hover:border-[#00A3C4] hover:bg-[#00A3C4] hover:text-white sm:w-auto sm:min-w-[230px]"
+            >
+              Discuss Your Project
+              <ArrowUpRight
+                size={18}
+                className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              />
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }

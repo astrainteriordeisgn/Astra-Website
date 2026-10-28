@@ -1,30 +1,79 @@
+
 import { useState } from 'react';
-import { Plus, Minus, HelpCircle } from 'lucide-react';
+import {
+  Plus,
+  Minus,
+  ArrowUpRight,
+  MessageCircle,
+  Compass,
+  Ruler,
+  Layers3,
+  Clock3,
+} from 'lucide-react';
 
 const faqs = [
   {
-    question: 'What is the typical timeline for a full villa renovation?',
-    answer: 'A comprehensive interior transformation usually takes 12 to 24 weeks. This includes: Conceptual phase (~4 weeks), Material procurement (6–8 weeks), and On-site execution. Clients receive a project-specific Gantt chart during the second consultation.'
+    question: 'How much does interior design cost in Coimbatore?',
+    answer:
+      'The cost of interior design in Coimbatore depends on the size of your property, design preferences, materials, furniture requirements and project scope. Astra Interior can discuss your requirements and help identify a suitable approach based on your space and budget.',
   },
   {
-    question: 'Do you offer a "Shop the Look" service for specific rooms?',
-    answer: 'Yes. Astra Interior provides an e-commerce platform where you can purchase curated furniture sets from portfolio projects. They also offer "Astra Collections", which are pre-designed interior packages for living, dining, and master suites.'
+    question: 'How long does a home interior project take?',
+    answer:
+      'The timeline depends on the size of the home, design complexity, material availability and execution requirements. After understanding your project, the scope and expected timeline can be discussed before work begins.',
   },
   {
-    question: 'How do you handle custom furniture and upholstery?',
-    answer: 'Astra operates its own artisanal workshop. Every piece — from walnut dining tables to Italian velvet sofas — is handcrafted to specific dimensions and material preferences.'
+    question: 'Do you design villas and luxury homes?',
+    answer:
+      'Yes. Astra Interior works on interior design requirements for residential spaces, including homes and villas. The design approach can be tailored to your preferred style, available space, functional needs and budget.',
   },
   {
-    question: 'Can I visit the site during the execution phase?',
-    answer: 'Yes. Clients are encouraged to visit at key milestones. In addition, Astra provides a weekly digital progress report with high-resolution photos and updates on materials and craftsmanship.'
+    question: 'Can you help with modular kitchens and custom furniture?',
+    answer:
+      'Kitchen planning and furniture requirements can be discussed as part of your interior project. The suitable design, storage options, finishes and furniture specifications depend on your space and the agreed scope of work.',
   },
   {
-    question: 'Where do you source your materials from?',
-    answer: 'Materials are sourced globally with a focus on sustainability: Marbles from Carrara, Italy; Oaks from managed European forests; and Textiles hand-woven by local traditional weavers.'
+    question: 'Do you provide 3D interior design visualizations?',
+    answer:
+      'Visualization requirements can be discussed during the design consultation. Depending on the agreed project scope, visual references or design presentations can help you understand the proposed layout, colours, materials and overall interior direction before execution.',
   },
   {
-    question: 'Do you provide 3D visualizations before work begins?',
-    answer: 'Yes. Every Astra project includes photorealistic 3D renders, allowing clients to experience the interplay of light, shadow, and texture before execution begins.'
+    question: 'Can I choose the materials, colours and finishes?',
+    answer:
+      'Yes. Your preferences are an important part of the design process. Materials, colour palettes, finishes and furniture options can be reviewed with consideration for aesthetics, functionality, maintenance and your budget.',
+  },
+  {
+    question: 'Do you handle electrical work, painting and furniture?',
+    answer:
+      'Astra Interior offers interior-related services that may include electrical work, painting, furniture design and other finishing requirements. The specific services included will be confirmed according to your project needs and agreed scope.',
+  },
+  {
+    question: 'How do I get started with Astra Interior?',
+    answer:
+      'Start by sharing your property type, location, approximate size, design preferences and budget. Astra Interior can then discuss your requirements and the next steps for planning your interior design project.',
+  },
+];
+
+const highlights = [
+  {
+    icon: Compass,
+    title: 'Design Planning',
+    description: 'Layouts and design direction tailored to your requirements.',
+  },
+  {
+    icon: Layers3,
+    title: 'Material Selection',
+    description: 'Finishes and materials considered for style and functionality.',
+  },
+  {
+    icon: Ruler,
+    title: 'Space & Furniture',
+    description: 'Practical planning for furniture, storage and everyday use.',
+  },
+  {
+    icon: Clock3,
+    title: 'Project Coordination',
+    description: 'Scope and expected timelines discussed before execution.',
   },
 ];
 
@@ -32,132 +81,293 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState(0);
 
   const toggleFAQ = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
+    setOpenIndex((current) => (current === index ? null : index));
+  };
+
+  const whatsappNumber = '919345445898';
+
+  const handleWhatsApp = () => {
+    const message = encodeURIComponent(
+      'Hello Astra Interior, I would like to enquire about interior design services in Coimbatore. Please help me understand the process and estimated cost.'
+    );
+
+    window.open(
+      `https://wa.me/${whatsappNumber}?text=${message}`,
+      '_blank',
+      'noopener,noreferrer'
+    );
   };
 
   return (
-    <section 
-      className="relative py-32 bg-[#FAF9F6] overflow-hidden"
+    <section
+      id="faq"
+      aria-labelledby="faq-heading"
+      className="relative overflow-hidden bg-[#F7F7F5] px-5 py-20 text-[#171717] sm:px-8 sm:py-24 lg:px-16 lg:py-28"
       style={{ fontFamily: '"Inter", sans-serif' }}
     >
-      
-      {/* SVG ARCHITECTURAL BLUEPRINT BACKGROUND using Brand Navy */}
-      <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none">
-        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="arch-grid" width="100" height="100" patternUnits="userSpaceOnUse">
-              <path d="M 100 0 L 0 0 0 100" fill="none" stroke="#1A365D" strokeWidth="0.5"/>
-              <circle cx="50" cy="50" r="1.5" fill="#00A3C4" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#arch-grid)" />
-        </svg>
-      </div>
+      {/* Subtle architectural grid */}
 
-      <div className="relative z-10 max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16">
-        
-        {/* Header Section with Brand Teal Accents */}
-        <div className="text-center mb-24 max-w-3xl mx-auto">
-          <div className="flex items-center justify-center space-x-4 mb-6">
-            <div className="w-12 h-[0.5px] bg-[#00A3C4]"></div>
-            <span className="text-[#00A3C4] uppercase tracking-[0.6em] text-[9px] font-medium">Inquiries</span>
-            <div className="w-12 h-[0.5px] bg-[#00A3C4]"></div>
-          </div>
-          <h2 
-            className="text-5xl md:text-7xl lg:text-8xl font-light text-[#1A365D] leading-tight tracking-tighter mb-8"
-            style={{ fontFamily: '"Poppins", sans-serif' }}
-          >
-            Common <br /> 
-            <span className="italic bg-gradient-to-r from-[#1A365D] via-[#00A3C4] to-[#1A365D] bg-clip-text text-transparent font-extralight">Curiosities</span>
-          </h2>
-          <p className="text-stone-400 font-extralight italic text-lg leading-relaxed">
-            "Clarity is the first step toward a well-designed sanctuary."
-          </p>
-        </div>
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-[0.035]"
+        style={{
+          backgroundImage:
+            'linear-gradient(#222 1px, transparent 1px), linear-gradient(90deg, #222 1px, transparent 1px)',
+          backgroundSize: '70px 70px',
+        }}
+      />
 
-        {/* FAQ List */}
-        <div className="grid lg:grid-cols-2 gap-x-20 gap-y-4 items-start">
-          {faqs.map((faq, idx) => (
-            <div
-              key={idx}
-              className={`group transition-all duration-500 border-b border-stone-100 ${
-                openIndex === idx ? 'pb-8' : 'pb-2'
-              }`}
-            >
-              <button
-                onClick={() => toggleFAQ(idx)}
-                className="w-full py-8 flex items-start justify-between text-left group"
-              >
-                <div className="flex space-x-8">
-                  {/* Brand Teal numbering on hover/active */}
-                  <span className={`text-stone-200 font-light text-2xl transition-colors tabular-nums ${openIndex === idx ? 'text-[#00A3C4]' : 'group-hover:text-[#00A3C4]'}`}>
-                    0{idx + 1}
-                  </span>
-                  <span 
-                    className={`text-xl font-light transition-all duration-500 tracking-tight ${
-                      openIndex === idx ? 'text-[#00A3C4] italic translate-x-2' : 'text-[#1A365D]'
-                    }`}
-                    style={{ fontFamily: '"Poppins", sans-serif' }}
-                  >
-                    {faq.question}
-                  </span>
-                </div>
-                <div className="flex-shrink-0 mt-2">
-                  {openIndex === idx ? 
-                    <Minus className="w-4 h-4 text-[#00A3C4] stroke-[1px]" /> : 
-                    <Plus className="w-4 h-4 text-stone-300 group-hover:text-[#1A365D] stroke-[1px]" />
-                  }
-                </div>
-              </button>
+      <div className="relative z-10 mx-auto max-w-[1400px]">
+        {/* Header */}
 
-              <div
-                className={`transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] overflow-hidden ${
-                  openIndex === idx ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
-                }`}
-              >
-                <div className="pl-16 pr-8 pb-4">
-                  <p className="text-stone-500 font-extralight leading-relaxed text-sm tracking-wide max-w-lg">
-                    {faq.answer}
-                  </p>
-                </div>
-              </div>
+        <div className="grid items-end gap-8 border-b border-[#DADAD6] pb-10 sm:pb-14 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
+          <div>
+            <div className="mb-6 flex items-center gap-3">
+              <span className="h-px w-10 bg-black" />
+
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#444444]">
+                Frequently Asked Questions
+              </span>
             </div>
-          ))}
+
+            <h2
+              id="faq-heading"
+              className="max-w-[850px] text-4xl font-semibold leading-[1.08] tracking-[-0.055em] sm:text-6xl lg:text-7xl"
+              style={{ fontFamily: '"Poppins", sans-serif' }}
+            >
+              Questions before
+              <br />
+              <span className="font-light italic text-[#777777]">
+                the transformation.
+              </span>
+            </h2>
+          </div>
+
+          <div className="max-w-[480px] lg:justify-self-end">
+            <p className="text-base leading-8 text-[#4B4B4B] sm:text-lg sm:leading-9">
+              Planning your home, villa or office interior? Find answers
+              about interior design costs, project timelines, materials,
+              furniture and the design process at Astra Interior in
+              Coimbatore.
+            </p>
+
+            <button
+              type="button"
+              onClick={handleWhatsApp}
+              className="group mt-6 inline-flex min-h-[48px] items-center gap-3 border border-black bg-black px-5 py-3 text-sm font-semibold text-white transition-colors duration-300 hover:bg-white hover:text-black"
+            >
+              Ask a Question
+              <ArrowUpRight
+                size={17}
+                className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              />
+            </button>
+          </div>
         </div>
 
-        {/* Bottom CTA Card in Brand Navy */}
-        <div className="mt-40 relative group overflow-hidden bg-[#1A365D] p-12 md:p-24 text-center rounded-[2rem]">
-          <div className="absolute top-0 right-0 p-12 opacity-[0.03] transition-transform duration-1000 group-hover:scale-110">
-            <HelpCircle className="w-64 h-64 text-white" />
+        {/* Main layout */}
+
+        <div className="grid gap-12 py-12 sm:py-16 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20 lg:py-20">
+          {/* Left information panel */}
+
+          <aside>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#555555]">
+              Before You Begin
+            </p>
+
+            <h3
+              className="mt-5 max-w-[400px] text-3xl font-semibold leading-tight tracking-[-0.04em] sm:text-4xl"
+              style={{ fontFamily: '"Poppins", sans-serif' }}
+            >
+              Make informed decisions for your space.
+            </h3>
+
+            <p className="mt-5 max-w-[420px] text-base leading-8 text-[#555555]">
+              Every interior project is different. Understanding the
+              process, materials, budget and requirements helps you plan
+              your next step with greater clarity.
+            </p>
+
+            <div className="mt-9 border-t border-[#DADAD6]">
+              {highlights.map((item, index) => {
+                const Icon = item.icon;
+
+                return (
+                  <div
+                    key={item.title}
+                    className="flex gap-4 border-b border-[#DADAD6] py-5"
+                  >
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-[#D2D2CE] bg-white">
+                      <Icon size={19} strokeWidth={1.6} />
+                    </div>
+
+                    <div>
+                      <h4 className="text-base font-semibold text-[#202020]">
+                        {item.title}
+                      </h4>
+
+                      <p className="mt-1 text-sm leading-6 text-[#666666]">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </aside>
+
+          {/* FAQ accordion */}
+
+          <div className="min-w-0">
+            <div className="mb-5 flex items-center justify-between gap-4">
+              <span className="text-xs font-bold uppercase tracking-[0.18em] text-[#555555]">
+                Interior Design Guide
+              </span>
+
+              <span className="text-xs font-semibold text-[#666666]">
+                {String(faqs.length).padStart(2, '0')} QUESTIONS
+              </span>
+            </div>
+
+            <div className="border-t border-[#D6D6D2]">
+              {faqs.map((faq, index) => {
+                const isOpen = openIndex === index;
+                const answerId = `faq-answer-${index}`;
+                const questionId = `faq-question-${index}`;
+
+                return (
+                  <article
+                    key={faq.question}
+                    className={`border-b border-[#D6D6D2] transition-colors duration-300 ${
+                      isOpen ? 'bg-white' : 'bg-transparent'
+                    }`}
+                  >
+                    <h3>
+                      <button
+                        id={questionId}
+                        type="button"
+                        onClick={() => toggleFAQ(index)}
+                        aria-expanded={isOpen}
+                        aria-controls={answerId}
+                        className="group flex w-full items-start gap-4 px-4 py-6 text-left transition-colors duration-300 hover:bg-[#EEEEEB] sm:gap-6 sm:px-6 sm:py-7"
+                      >
+                        <span
+                          className={`mt-0.5 w-8 shrink-0 text-sm font-semibold tabular-nums transition-colors ${
+                            isOpen
+                              ? 'text-black'
+                              : 'text-[#92928D] group-hover:text-black'
+                          }`}
+                        >
+                          {String(index + 1).padStart(2, '0')}
+                        </span>
+
+                        <span
+                          className={`flex-1 text-base font-semibold leading-7 tracking-tight transition-colors sm:text-lg sm:leading-8 ${
+                            isOpen
+                              ? 'text-black'
+                              : 'text-[#303030] group-hover:text-black'
+                          }`}
+                          style={{ fontFamily: '"Poppins", sans-serif' }}
+                        >
+                          {faq.question}
+                        </span>
+
+                        <span
+                          className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center border transition-all duration-300 ${
+                            isOpen
+                              ? 'border-black bg-black text-white'
+                              : 'border-[#D6D6D2] bg-white text-[#333333] group-hover:border-black group-hover:bg-black group-hover:text-white'
+                          }`}
+                        >
+                          {isOpen ? (
+                            <Minus size={16} strokeWidth={1.8} />
+                          ) : (
+                            <Plus size={16} strokeWidth={1.8} />
+                          )}
+                        </span>
+                      </button>
+                    </h3>
+
+                    <div
+                      id={answerId}
+                      role="region"
+                      aria-labelledby={questionId}
+                      hidden={!isOpen}
+                    >
+                      <div className="pb-7 pl-16 pr-5 sm:pl-[5.5rem] sm:pr-10">
+                        <p className="max-w-[650px] text-sm leading-7 text-[#555555] sm:text-base sm:leading-8">
+                          {faq.answer}
+                        </p>
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+
+            <p className="mt-5 text-xs leading-6 text-[#777777]">
+              Project costs, deliverables and timelines depend on the
+              requirements and agreed scope of each individual project.
+            </p>
           </div>
-          <h3 
-            className="relative z-10 text-4xl md:text-6xl font-light text-white mb-8 tracking-tight"
+        </div>
+
+        {/* Bottom CTA */}
+
+        <div className="relative overflow-hidden bg-[#171717] px-6 py-12 text-white sm:px-10 sm:py-16 lg:px-16 lg:py-20">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -right-12 -top-16 select-none text-[180px] font-bold leading-none tracking-[-0.1em] text-white/[0.035] sm:-right-8 sm:text-[260px]"
             style={{ fontFamily: '"Poppins", sans-serif' }}
           >
-            Still Seeking <span className="italic text-[#00A3C4] font-extralight">Inspiration?</span>
-          </h3>
-          <p className="relative z-10 text-stone-300 mb-12 max-w-xl mx-auto font-extralight text-lg">
-            Our design consultants are available for a private walkthrough of our material library and portfolio.
-          </p>
-          <button
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="group relative z-10 px-14 py-5 bg-transparent border border-[#00A3C4] text-[#00A3C4] uppercase tracking-[0.5em] text-[10px] font-medium overflow-hidden transition-all duration-500 hover:text-white"
-          >
-            <span className="relative z-10">Start a Conversation</span>
-            {/* Liquid Fill in Brand Teal */}
-            <div className="absolute inset-0 bg-[#00A3C4] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
-          </button>
+            A
+          </div>
+
+          <div className="relative z-10 grid items-center gap-8 lg:grid-cols-[1fr_auto] lg:gap-12">
+            <div>
+              <div className="mb-5 flex items-center gap-3">
+                <span className="h-px w-8 bg-white" />
+
+                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
+                  Let’s Discuss Your Project
+                </span>
+              </div>
+
+              <h3
+                className="max-w-[750px] text-3xl font-semibold leading-tight tracking-[-0.04em] sm:text-5xl"
+                style={{ fontFamily: '"Poppins", sans-serif' }}
+              >
+                Have a space in mind?
+                <br />
+                <span className="font-light italic text-[#BDBDBD]">
+                  Let’s talk about it.
+                </span>
+              </h3>
+
+              <p className="mt-5 max-w-[620px] text-base leading-8 text-white/70 sm:text-lg">
+                Connect with Astra Interior to discuss your home interior,
+                villa, furniture or commercial interior design requirements
+                in Coimbatore.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={handleWhatsApp}
+              className="group inline-flex min-h-[58px] w-full items-center justify-between gap-5 border border-white bg-white px-6 py-4 text-sm font-semibold text-black transition-colors duration-300 hover:border-white hover:bg-black hover:text-white sm:w-auto sm:min-w-[245px]"
+            >
+              <span className="flex items-center gap-3">
+                <MessageCircle size={18} />
+                Start a Conversation
+              </span>
+
+              <ArrowUpRight
+                size={18}
+                className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              />
+            </button>
+          </div>
         </div>
-      </div>
-      
-      {/* Decorative Branding in Brand Navy */}
-      <div className="absolute -bottom-10 left-0 w-full opacity-[0.02] pointer-events-none select-none">
-        <h2 
-          className="text-[25vw] font-bold leading-none text-[#1A365D] tracking-tighter"
-          style={{ fontFamily: '"Poppins", sans-serif' }}
-        >
-          ASTRA
-        </h2>
       </div>
     </section>
   );

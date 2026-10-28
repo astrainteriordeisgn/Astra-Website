@@ -1,95 +1,218 @@
-import { Link } from 'react-router-dom';
-import { Facebook, Instagram, ArrowRight, Mail, Phone, MapPin, MessageSquare } from 'lucide-react';
-// UPDATED: Using original astralogo.webp as requested
-import Logo from '../assests/astralogo.webp'; 
+
+import React from "react";
+import { Link } from "react-router-dom";
+import {
+  Facebook,
+  Instagram,
+  ArrowUpRight,
+  ArrowRight,
+  Mail,
+  Phone,
+  MapPin,
+  MessageCircle,
+ 
+} from "lucide-react";
+import Logo from "../assests/astralogo.webp";
+
+
+
+const footerLinks = [
+  { name: "About Astra", path: "/about" },
+  { name: "Our Portfolio", path: "/port" },
+  { name: "Interior Design Services", path: "/services" },
+  { name: "Design Journal", path: "/blog" },
+  { name: "Contact Our Studio", path: "/contactus" },
+];
+
+const services = [
+  "Home Interior Design",
+  "Villa Interior Design",
+  "Commercial Interiors",
+  "Custom Furniture Design",
+  "Lighting & Finishing",
+];
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   const whatsappNumber = "919345445898";
 
   const handleWhatsAppRedirect = () => {
-    window.open(`https://wa.me/${whatsappNumber}`, '_blank', 'noopener,noreferrer');
+    const message = encodeURIComponent(
+      "Hello Astra Interior, I would like to enquire about interior design services in Coimbatore."
+    );
+
+    window.open(
+      `https://wa.me/${whatsappNumber}?text=${message}`,
+      "_blank",
+      "noopener,noreferrer"
+    );
   };
 
   return (
-    <footer 
-      className="relative bg-[#050A0F] overflow-hidden border-t border-white/5" 
+    <footer
+      className="relative overflow-hidden bg-[#0B1728] text-white"
       aria-labelledby="footer-heading"
       style={{ fontFamily: '"Inter", sans-serif' }}
     >
-      <h2 id="footer-heading" className="sr-only">Footer</h2>
-      
-      {/* SVG BACKGROUND: ARCHITECTURAL TECHNICAL GRID */}
-      <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" aria-hidden="true">
-        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="footer-grid" width="80" height="80" patternUnits="userSpaceOnUse">
-              <path d="M 80 0 L 0 0 0 80" fill="none" stroke="#00A3C4" strokeWidth="0.5"/>
-              <circle cx="40" cy="40" r="1" fill="#00A3C4" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#footer-grid)" />
-        </svg>
+      {/* BACKGROUND DECORATION */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 overflow-hidden"
+      >
+        <div className="absolute -right-24 -top-32 h-96 w-96 rounded-full bg-[#00A3C4]/10 blur-3xl" />
+
+        <div className="absolute -bottom-40 -left-24 h-96 w-96 rounded-full bg-[#1A365D]/40 blur-3xl" />
+
+        <div
+          className="absolute inset-0 opacity-[0.035]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.7) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.7) 1px, transparent 1px)",
+            backgroundSize: "72px 72px",
+          }}
+        />
       </div>
 
-      <div className="relative z-10 max-w-[1600px] mx-auto px-6 lg:px-16 pt-24 pb-12">
-        
-        {/* TOP SECTION: PROFESSIONAL BENTO UI */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-px bg-white/10 border border-white/10 overflow-hidden shadow-2xl">
-          
-          {/* Block 1: Identity - Deep Navy Base */}
-          <div className="lg:col-span-4 bg-[#050A0F] p-10 lg:p-14 space-y-10">
-            <Link to="/" aria-label="Astra Interior Home" className="inline-block group">
-              <img 
-                src={Logo} 
-                alt="Astra Interior" 
-                className="h-16 w-auto object-contain transition-transform duration-700 group-hover:scale-105" 
-                loading="lazy"
+      <div className="relative z-10 mx-auto max-w-[1440px] px-5 pb-7 pt-14 sm:px-8 sm:pt-20 lg:px-16 lg:pt-24">
+        {/* FOOTER INTRO */}
+        <div className="mb-12 grid gap-8 border-b border-white/10 pb-10 lg:grid-cols-[1fr_auto] lg:items-end lg:gap-12">
+          <div>
+            <div className="mb-5 flex items-center gap-3">
+              <span className="h-[3px] w-8 rounded-full bg-[#00A3C4]" />
+
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-cyan-200 sm:text-xs">
+                Astra Interior · Coimbatore
+              </span>
+            </div>
+
+            <h2
+              id="footer-heading"
+              className="max-w-3xl text-3xl font-semibold leading-tight tracking-[-0.045em] text-white sm:text-4xl lg:text-5xl"
+              style={{ fontFamily: '"Poppins", sans-serif' }}
+            >
+              Thoughtful interiors.
+              <span className="block font-medium italic text-[#00A3C4]">
+                Spaces made for living.
+              </span>
+            </h2>
+
+            <p className="mt-5 max-w-2xl text-sm font-medium leading-7 text-slate-300 sm:text-base sm:leading-8">
+              Discover interior design services for homes, villas and
+              commercial spaces in Coimbatore, Tamil Nadu. From furniture
+              planning to lighting and finishing, Astra Interior helps
+              you explore ideas for your space.
+            </p>
+          </div>
+
+          <button
+            type="button"
+            onClick={handleWhatsAppRedirect}
+            className="group inline-flex min-h-[54px] w-full items-center justify-between gap-5 rounded-lg bg-[#00A3C4] px-5 py-4 text-sm font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:text-[#1A365D] hover:shadow-xl sm:w-auto sm:min-w-[245px]"
+          >
+            <span className="flex items-center gap-3">
+              <MessageCircle size={19} />
+              Discuss Your Project
+            </span>
+
+            <ArrowUpRight
+              size={19}
+              className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            />
+          </button>
+        </div>
+
+        {/* MAIN FOOTER GRID */}
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-12 lg:gap-10">
+          {/* BRAND */}
+          <div className="sm:col-span-2 lg:col-span-4">
+            <Link
+              to="/"
+              aria-label="Astra Interior home page"
+              className="inline-flex items-center rounded-md bg-white p-3 transition-opacity hover:opacity-90"
+            >
+              <img
+                src={Logo}
+                alt="Astra Interior Design Studio"
+                className="h-14 w-auto max-w-[220px] object-contain sm:h-16"
+                width="220"
+                height="64"
               />
             </Link>
-            <p className="text-stone-400 leading-relaxed font-extralight italic text-lg max-w-sm">
-              "Crafting timeless sanctuaries where architectural precision meets the soul of modern living."
+
+            <p className="mt-5 max-w-sm text-sm font-medium leading-7 text-slate-300 sm:text-base sm:leading-8">
+              We bring together style, comfort and functionality to help
+              create interiors that reflect the way you live and work.
             </p>
-            <div className="flex space-x-3">
+
+            <div className="mt-6 flex flex-wrap gap-3">
               {[
-                { icon: Instagram, href: "https://www.instagram.com/astra_.interior/", label: "Instagram" },
-                { icon: Facebook, href: "https://www.facebook.com/profile.php?id=61562835308067", label: "Facebook" }
-              ].map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-12 h-12 border border-white/10 flex items-center justify-center text-stone-400 hover:text-white hover:bg-[#00A3C4] hover:border-[#00A3C4] transition-all duration-500 rounded-full"
-                >
-                  <span className="sr-only">{social.label}</span>
-                  <social.icon className="w-4 h-4 stroke-[1px]" />
-                </a>
-              ))}
+                {
+                  icon: Instagram,
+                  href: "https://www.instagram.com/astra_.interior/",
+                  label: "Instagram",
+                },
+                {
+                  icon: Facebook,
+                  href: "https://www.facebook.com/profile.php?id=61562835308067",
+                  label: "Facebook",
+                },
+              ].map((social) => {
+                const Icon = social.icon;
+
+                return (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Visit Astra Interior on ${social.label}`}
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-slate-300 transition-all duration-300 hover:-translate-y-1 hover:border-[#00A3C4] hover:bg-[#00A3C4] hover:text-white"
+                  >
+                    <Icon size={18} />
+                  </a>
+                );
+              })}
+            </div>
+
+            <div className="mt-7 flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.035] p-4">
+             
+
+              <p className="text-xs font-semibold leading-6 text-slate-300 sm:text-sm">
+                Interior design ideas, considered materials and
+                thoughtful spaces for everyday living.
+              </p>
             </div>
           </div>
 
-          {/* Block 2: Navigation - Minimalist Studio Links */}
-          <div className="lg:col-span-4 bg-[#050A0F] p-10 lg:p-14 border-y lg:border-y-0 lg:border-x border-white/10">
-            <h3 
-              className="text-[#00A3C4] font-light text-2xl tracking-tight mb-12"
+          {/* NAVIGATION */}
+          <div className="lg:col-span-3">
+            <h3
+              className="text-xl font-semibold text-white"
               style={{ fontFamily: '"Poppins", sans-serif' }}
             >
-              The Studio
+              Explore Astra
             </h3>
-            <nav aria-label="Footer Navigation">
-              <ul className="space-y-6">
-                {[
-                  { name: 'About Astra', path: '/about' },
-                  { name: 'Our Portfolio', path: '/port' },
-                  { name: 'Services', path: '/services' },
-                  { name: 'Design Journal', path: '/blog' },
-                  { name: 'Private Inquiry', path: '/contactus' }
-                ].map((item) => (
-                  <li key={item.name}>
-                    <Link to={item.path} className="text-stone-400 hover:text-[#00A3C4] transition-all flex items-center group text-[10px] uppercase tracking-[0.5em] font-bold">
-                      <span className="w-0 group-hover:w-8 h-[0.5px] bg-[#00A3C4] mr-0 group-hover:mr-4 transition-all duration-500"></span>
-                      {item.name}
+
+            <p className="mt-2 text-sm font-medium leading-6 text-slate-400">
+              Discover our studio and design services.
+            </p>
+
+            <nav aria-label="Footer navigation" className="mt-6">
+              <ul className="space-y-3">
+                {footerLinks.map((item) => (
+                  <li key={item.path}>
+                    <Link
+                      to={item.path}
+                      className="group flex min-h-[36px] items-center gap-3 text-sm font-medium text-slate-300 transition-colors duration-300 hover:text-cyan-200"
+                    >
+                      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#00A3C4] transition-transform duration-300 group-hover:scale-125" />
+
+                      <span>{item.name}</span>
+
+                      <ArrowUpRight
+                        size={14}
+                        className="ml-auto shrink-0 opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:opacity-100"
+                      />
                     </Link>
                   </li>
                 ))}
@@ -97,75 +220,176 @@ export default function Footer() {
             </nav>
           </div>
 
-          {/* Block 3: Contact & Engagement */}
-          <div className="lg:col-span-4 bg-[#050A0F] p-10 lg:p-14 flex flex-col justify-between">
-            <div className="space-y-12">
-              <h3 
-                className="text-[#00A3C4] font-light text-2xl tracking-tight"
-                style={{ fontFamily: '"Poppins", sans-serif' }}
-              >
-                Inquiries
-              </h3>
-              <div className="space-y-8">
-                <a href="tel:+919345445898" className="flex items-center space-x-5 text-stone-400 hover:text-white transition-colors group">
-                  <Phone className="w-4 h-4 text-[#00A3C4] stroke-[1px] opacity-70" />
-                  <span className="text-sm font-extralight tracking-widest">+91 93454 45898</span>
-                </a>
-                <a href="mailto:astrainterior83@gmail.com" className="flex items-center space-x-5 text-stone-400 hover:text-white transition-colors group">
-                  <Mail className="w-4 h-4 text-[#00A3C4] stroke-[1px] opacity-70" />
-                  <span className="text-sm font-extralight tracking-widest">astrainterior83@gmail.com</span>
-                </a>
-                <address className="flex items-start space-x-5 text-stone-400 not-italic">
-                  <MapPin className="w-4 h-4 text-[#00A3C4] stroke-[1px] shrink-0 opacity-70" />
-                  <span className="text-sm font-extralight tracking-widest leading-relaxed">Race Course, Coimbatore,<br />Tamil Nadu, India</span>
-                </address>
-              </div>
-            </div>
-
-            <button 
-              onClick={handleWhatsAppRedirect}
-              className="mt-16 flex items-center justify-between w-full py-6 bg-[#FAF9F6]/5 border border-white/5 text-white px-8 uppercase tracking-[0.6em] text-[9px] font-black hover:bg-[#00A3C4] hover:border-[#00A3C4] transition-all duration-700 group overflow-hidden rounded-sm"
+          {/* SERVICES */}
+          <div className="lg:col-span-2">
+            <h3
+              className="text-xl font-semibold text-white"
+              style={{ fontFamily: '"Poppins", sans-serif' }}
             >
-              <span className="relative z-10 flex items-center">
-                <MessageSquare className="mr-4 w-3.5 h-3.5 opacity-60" />
-                Direct WhatsApp
+              Our Services
+            </h3>
+
+            <p className="mt-2 text-sm font-medium leading-6 text-slate-400">
+              Interior solutions for your space.
+            </p>
+
+            <ul className="mt-6 space-y-3">
+              {services.map((service) => (
+                <li key={service}>
+                  <Link
+                    to="/services"
+                    className="inline-flex min-h-[32px] items-center text-sm font-medium leading-6 text-slate-300 transition-colors duration-300 hover:text-cyan-200"
+                  >
+                    {service}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* CONTACT */}
+          <div className="lg:col-span-3">
+            <h3
+              className="text-xl font-semibold text-white"
+              style={{ fontFamily: '"Poppins", sans-serif' }}
+            >
+              Get in Touch
+            </h3>
+
+            <p className="mt-2 text-sm font-medium leading-6 text-slate-400">
+              Have an interior project in mind? Let's talk.
+            </p>
+
+            <address className="mt-6 space-y-5 not-italic">
+              <a
+                href="tel:+919345445898"
+                className="group flex items-start gap-3"
+              >
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-cyan-200 transition-colors group-hover:bg-[#00A3C4] group-hover:text-white">
+                  <Phone size={17} />
+                </span>
+
+                <span className="min-w-0 pt-1">
+                  <span className="block text-[10px] font-bold uppercase tracking-[0.13em] text-slate-400">
+                    Phone
+                  </span>
+
+                  <span className="mt-1 block text-sm font-semibold text-slate-200 transition-colors group-hover:text-cyan-200">
+                    +91 93454 45898
+                  </span>
+                </span>
+              </a>
+
+              <a
+                href="mailto:astrainterior83@gmail.com"
+                className="group flex items-start gap-3"
+              >
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-cyan-200 transition-colors group-hover:bg-[#00A3C4] group-hover:text-white">
+                  <Mail size={17} />
+                </span>
+
+                <span className="min-w-0 pt-1">
+                  <span className="block text-[10px] font-bold uppercase tracking-[0.13em] text-slate-400">
+                    Email
+                  </span>
+
+                  <span className="mt-1 block break-words text-sm font-semibold text-slate-200 transition-colors group-hover:text-cyan-200">
+                    astrainterior83@gmail.com
+                  </span>
+                </span>
+              </a>
+
+              <div className="flex items-start gap-3">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-cyan-200">
+                  <MapPin size={17} />
+                </span>
+
+                <div className="min-w-0 pt-1">
+                  <span className="block text-[10px] font-bold uppercase tracking-[0.13em] text-slate-400">
+                    Location
+                  </span>
+
+                  <p className="mt-1 text-sm font-semibold leading-6 text-slate-200">
+                    Coimbatore, Tamil Nadu, India
+                  </p>
+                </div>
+              </div>
+            </address>
+
+            <button
+              type="button"
+              onClick={handleWhatsAppRedirect}
+              className="group mt-7 flex min-h-[48px] w-full items-center justify-between gap-3 rounded-lg border border-white/15 bg-white/[0.04] px-4 py-3 text-sm font-bold text-white transition-all duration-300 hover:border-[#00A3C4] hover:bg-[#00A3C4]"
+            >
+              <span className="flex items-center gap-3">
+                <MessageCircle size={18} />
+                WhatsApp Enquiry
               </span>
-              <ArrowRight className="relative z-10 w-4 h-4 group-hover:translate-x-3 transition-transform duration-500" />
+
+              <ArrowRight
+                size={17}
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              />
             </button>
           </div>
         </div>
 
-        {/* BOTTOM UTILITY BAR */}
-        <div className="pt-12 border-t border-white/5">
-          <div className="flex flex-col lg:flex-row justify-between items-center gap-10">
-            <div className="flex flex-col items-center lg:items-start space-y-2">
-              <p className="text-stone-500 text-[9px] uppercase tracking-[0.5em] font-medium">
-                © {currentYear} Astra Interior Design Studio
+        {/* SEO SUPPORTING TEXT */}
+        <div className="mt-12 rounded-xl border border-white/10 bg-white/[0.025] p-5 sm:p-6">
+          <p className="text-sm font-semibold leading-7 text-slate-200">
+            Astra Interior provides interior design services in Coimbatore,
+            Tamil Nadu, including home interiors, villa interiors,
+            commercial interior design, furniture planning, lighting,
+            painting and finishing.
+          </p>
+        </div>
+
+        {/* BOTTOM BAR */}
+        <div className="mt-8 border-t border-white/10 pt-6">
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+            <div className="text-center sm:text-left">
+              <p className="text-xs font-semibold text-slate-300">
+                © {currentYear} Astra Interior. All rights reserved.
               </p>
-              <p className="text-stone-600 text-[8px] uppercase tracking-[0.4em] font-light">
-                Handcrafted Excellence in Coimbatore
+
+              <p className="mt-2 text-xs font-medium leading-6 text-slate-400">
+                Interior design studio in Coimbatore, Tamil Nadu.
               </p>
             </div>
-            
-            <div className="flex space-x-12">
-              {['Privacy', 'Terms', 'Legal'].map((link) => (
-                <Link key={link} to="/contactus" className="text-stone-500 hover:text-[#00A3C4] text-[9px] uppercase tracking-[0.3em] transition-colors font-black">
-                  {link}
-                </Link>
-              ))}
+
+            <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-3 sm:justify-end">
+              <Link
+                to="/contactus"
+                className="text-xs font-semibold text-slate-300 transition-colors hover:text-cyan-200"
+              >
+                Privacy
+              </Link>
+
+              <span className="h-1 w-1 rounded-full bg-slate-600" />
+
+              <Link
+                to="/contactus"
+                className="text-xs font-semibold text-slate-300 transition-colors hover:text-cyan-200"
+              >
+                Terms
+              </Link>
+
+              <span className="h-1 w-1 rounded-full bg-slate-600" />
+
+              <a
+                href="#top"
+                onClick={(event) => {
+                  event.preventDefault();
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
+                className="inline-flex items-center gap-2 text-xs font-semibold text-slate-300 transition-colors hover:text-cyan-200"
+              >
+                Back to Top
+                <ArrowUpRight size={14} />
+              </a>
             </div>
           </div>
         </div>
-      </div>
-      
-      {/* BRAND WATERMARK */}
-      <div className="absolute -bottom-10 right-10 opacity-[0.02] pointer-events-none select-none" aria-hidden="true">
-        <span 
-          className="text-[18vw] font-bold leading-none text-[#1A365D] tracking-tighter"
-          style={{ fontFamily: '"Poppins", sans-serif' }}
-        >
-          ASTRA
-        </span>
       </div>
     </footer>
   );

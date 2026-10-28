@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import Whatsapp from './components/whatsapp';
 import ScrollToTop from './components/scrolltotop'; // Scroll logic
 import Scrollup from './components/scrollup';     // The UI button
+import HammerScroll from './components/pages/HammerScroll'; // The UI button
 
 // Lazy load page-level components
 const Homepage = lazy(() => import('./components/Homepage'));
@@ -19,9 +20,12 @@ const ThankYou = lazy(() => import('./components/Thankyoupage'));
 
 function App() {
   return (
+    
     <Router>
+      <HammerScroll />
       {/* 1. Logic & Global UI elements */}
       <ScrollToTop /> 
+      
       <Navigation />
       <Whatsapp />
       <Scrollup />  
